@@ -1,14 +1,21 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <SDL2/SDL.h>
+#include "body.h"
 
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
 #define FPS 60
 
 #define PLAYER_SIZE 20
+#define PLAYER_SPEED 3
 
-void handleEvents(int *quit);
+#define BALL_SIZE 2
+#define BALL_SPEED 5
+
+
+
+void handleEvents(int *quit, const Uint8 *keyboardState);
 void physicsCalculations();
 void graphicsCalculations();
 
@@ -19,16 +26,16 @@ SDL_Event e;
 Uint32 backgroundColor;
 Uint32 playerColor;
 
-SDL_Rect playerPosition;
-
-SDL_Surface* player = NULL;
-
 int center(int a, int b) {
     return a / 2 - b / 2;
 }
 
+Body player;
+Body ball;
+
 int main(int argc, char *argv[]) {
 
+    const Uint8 *keyboardState = SDL_GetKeyboardState(NULL);
     SDL_Init(SDL_INIT_VIDEO);
 
     window = SDL_CreateWindow("Space Shooter", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
@@ -36,33 +43,33 @@ int main(int argc, char *argv[]) {
 
     int quit = 0;
 
-    backgroundColor = SDL_MapRGB(screen->format, 17, 206, 112);
-    backgroundColor = SDL_MapRGB(screen->format, 255, 255, 255);
+    backgroundColor = 0x11CE70;
+    playerColor = 0x000000;
 
 
-    player = SDL_CreateRGBSurface(0, PLAYER_SIZE, PLAYER_SIZE, 32, 0, 0, 0, 0);
-    playerPosition.x = center(SCREEN_WIDTH, PLAYER_SIZE);
-    playerPosition.y = SCREEN_HEIGHT * 3 / 4;
+    player = createBody(PLAYER_SIZE, center(SCREEN_WIDTH, PLAYER_SIZE), SCREEN_HEIGHT * 3 / 4);
+    ball = createBody(BALL_SIZE, player.position.x + 5, player.position.y + 5);
 
     while(!quit) {
-
-        handleEvents(&quit);
+        handleEvents(&quit, keyboardState);
         physicsCalculations();
         graphicsCalculations();
+
 
 
         SDL_UpdateWindowSurface(window);
         SDL_Delay(1000 / FPS);
     }
 
-    SDL_FreeSurface(player);
+    freeBody(player);
+    freeBody(ball);
 
     SDL_Quit();
     return 0;
 }
 
 
-void handleEvents(int *quit) {
+void handleEvents(int *quit, const Uint8 *keyboardState) {
 
     while(SDL_PollEvent(&e) != 0) {
 
@@ -73,6 +80,22 @@ void handleEvents(int *quit) {
                 break;
         }
     }
+
+    SDL_PumpEvents();
+
+    if(keyboardState[SDL_SCANCODE_UP])
+        player.position.y -= PLAYER_SPEED;
+
+    else if(keyboardState[SDL_SCANCODE_DOWN])
+        player.position.y += PLAYER_SPEED;
+
+    if(keyboardState[SDL_SCANCODE_LEFT])
+        player.position.x -= PLAYER_SPEED;
+
+    else if(keyboardState[SDL_SCANCODE_RIGHT])
+        player.position.x += PLAYER_SPEED;
+
+
 }
 
 void physicsCalculations() {
@@ -85,9 +108,8 @@ void graphicsCalculations() {
 
     SDL_FillRect(screen, NULL, backgroundColor);
 
-
-    SDL_FillRect(player, NULL, playerColor);
-    SDL_BlitSurface(player, NULL, screen, &playerPosition);
+    SDL_FillRect(player.surface, NULL, playerColor);
+    SDL_BlitSurface(player.surface, NULL, screen, &player.position);
 
 }
 

@@ -122,32 +122,59 @@ SpaceShooter/fast:
 	$(MAKE) -f CMakeFiles\SpaceShooter.dir\build.make CMakeFiles/SpaceShooter.dir/build
 .PHONY : SpaceShooter/fast
 
-main.obj: main.c.obj
+src/body.obj: src/body.c.obj
 
-.PHONY : main.obj
+.PHONY : src/body.obj
 
 # target to build an object file
-main.c.obj:
-	$(MAKE) -f CMakeFiles\SpaceShooter.dir\build.make CMakeFiles/SpaceShooter.dir/main.c.obj
-.PHONY : main.c.obj
+src/body.c.obj:
+	$(MAKE) -f CMakeFiles\SpaceShooter.dir\build.make CMakeFiles/SpaceShooter.dir/src/body.c.obj
+.PHONY : src/body.c.obj
 
-main.i: main.c.i
+src/body.i: src/body.c.i
 
-.PHONY : main.i
+.PHONY : src/body.i
 
 # target to preprocess a source file
-main.c.i:
-	$(MAKE) -f CMakeFiles\SpaceShooter.dir\build.make CMakeFiles/SpaceShooter.dir/main.c.i
-.PHONY : main.c.i
+src/body.c.i:
+	$(MAKE) -f CMakeFiles\SpaceShooter.dir\build.make CMakeFiles/SpaceShooter.dir/src/body.c.i
+.PHONY : src/body.c.i
 
-main.s: main.c.s
+src/body.s: src/body.c.s
 
-.PHONY : main.s
+.PHONY : src/body.s
 
 # target to generate assembly for a file
-main.c.s:
-	$(MAKE) -f CMakeFiles\SpaceShooter.dir\build.make CMakeFiles/SpaceShooter.dir/main.c.s
-.PHONY : main.c.s
+src/body.c.s:
+	$(MAKE) -f CMakeFiles\SpaceShooter.dir\build.make CMakeFiles/SpaceShooter.dir/src/body.c.s
+.PHONY : src/body.c.s
+
+src/main.obj: src/main.c.obj
+
+.PHONY : src/main.obj
+
+# target to build an object file
+src/main.c.obj:
+	$(MAKE) -f CMakeFiles\SpaceShooter.dir\build.make CMakeFiles/SpaceShooter.dir/src/main.c.obj
+.PHONY : src/main.c.obj
+
+src/main.i: src/main.c.i
+
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.c.i:
+	$(MAKE) -f CMakeFiles\SpaceShooter.dir\build.make CMakeFiles/SpaceShooter.dir/src/main.c.i
+.PHONY : src/main.c.i
+
+src/main.s: src/main.c.s
+
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.c.s:
+	$(MAKE) -f CMakeFiles\SpaceShooter.dir\build.make CMakeFiles/SpaceShooter.dir/src/main.c.s
+.PHONY : src/main.c.s
 
 # Help Target
 help:
@@ -158,9 +185,12 @@ help:
 	@echo ... SpaceShooter
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... main.obj
-	@echo ... main.i
-	@echo ... main.s
+	@echo ... src/body.obj
+	@echo ... src/body.i
+	@echo ... src/body.s
+	@echo ... src/main.obj
+	@echo ... src/main.i
+	@echo ... src/main.s
 .PHONY : help
 
 

@@ -600,11 +600,17 @@ close_code.h
 
 ../include/SDL2/close_code.h
 
-C:/Users/TGE/Documents/ClionProjects/SpaceShooter/main.c
+C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/body.h
+SDL2/SDL.h
+-
+
+C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/main.c
 stdlib.h
 -
 stdio.h
 -
 SDL2/SDL.h
 -
+body.h
+C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/body.h
 

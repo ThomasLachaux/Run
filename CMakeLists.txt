@@ -9,6 +9,6 @@ link_directories(${PROJECT_SOURCE_DIR}/lib)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(SpaceShooter main.c)
+add_executable(SpaceShooter src/main.c src/body.c src/body.h)
 
 target_link_libraries(SpaceShooter mingw32 SDL2main SDL2)

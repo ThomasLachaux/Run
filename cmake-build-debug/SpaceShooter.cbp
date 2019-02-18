@@ -76,7 +76,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/TGE/Documents/ClionProjects/SpaceShooter/main.c">
+		<Unit filename="C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/body.c">
+			<Option target="SpaceShooter"/>
+		</Unit>
+		<Unit filename="C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/body.h">
+			<Option target="SpaceShooter"/>
+		</Unit>
+		<Unit filename="C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/main.c">
 			<Option target="SpaceShooter"/>
 		</Unit>
 		<Unit filename="C:/Users/TGE/Documents/ClionProjects/SpaceShooter/CMakeLists.txt">
