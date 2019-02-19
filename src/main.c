@@ -1,37 +1,24 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <SDL2/SDL.h>
+
+#include "game.h"
 #include "body.h"
-
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
-#define FPS 60
-
-#define PLAYER_SIZE 20
-#define PLAYER_SPEED 3
-
-#define BALL_SIZE 2
-#define BALL_SPEED 5
-
-
-
-void handleEvents(int *quit, const Uint8 *keyboardState);
-void physicsCalculations();
-void graphicsCalculations();
 
 SDL_Window *window = NULL;
 SDL_Surface *screen = NULL;
 SDL_Event e;
 
-Uint32 backgroundColor;
-Uint32 playerColor;
+Body *player = NULL;
+Body *ball = NULL;
+
+void handleEvents(int *quit, const Uint8 *keyboardState);
+void physicsCalculations();
+void graphicsCalculations();
 
 int center(int a, int b) {
     return a / 2 - b / 2;
 }
-
-Body player;
-Body ball;
 
 int main(int argc, char *argv[]) {
 
@@ -43,22 +30,18 @@ int main(int argc, char *argv[]) {
 
     int quit = 0;
 
-    backgroundColor = 0x11CE70;
-    playerColor = 0x000000;
+    player = createBody(20, SCREEN_WIDTH / 2, SCREEN_HEIGHT * 3 / 4, 4);
 
-
-    player = createBody(PLAYER_SIZE, center(SCREEN_WIDTH, PLAYER_SIZE), SCREEN_HEIGHT * 3 / 4);
-    ball = createBody(BALL_SIZE, player.position.x + 5, player.position.y + 5);
+    ball = createBody(5, player->position.x + 5, player->position.y + 5, 5);
+    ball->normalVelocity.y = -1;
 
     while(!quit) {
         handleEvents(&quit, keyboardState);
         physicsCalculations();
         graphicsCalculations();
 
-
-
         SDL_UpdateWindowSurface(window);
-        SDL_Delay(1000 / FPS);
+        SDL_Delay(DELTA_TIME);
     }
 
     freeBody(player);
@@ -72,44 +55,50 @@ int main(int argc, char *argv[]) {
 void handleEvents(int *quit, const Uint8 *keyboardState) {
 
     while(SDL_PollEvent(&e) != 0) {
-
-        switch (e.type) {
-
-            case SDL_QUIT:
-                *quit = 1;
-                break;
-        }
+        if(e.type == SDL_QUIT)
+            *quit = 1;
     }
 
     SDL_PumpEvents();
 
     if(keyboardState[SDL_SCANCODE_UP])
-        player.position.y -= PLAYER_SPEED;
+        player->normalVelocity.y = -1;
 
     else if(keyboardState[SDL_SCANCODE_DOWN])
-        player.position.y += PLAYER_SPEED;
+        player->normalVelocity.y = 1;
+
+    else
+        player->normalVelocity.y = 0;
 
     if(keyboardState[SDL_SCANCODE_LEFT])
-        player.position.x -= PLAYER_SPEED;
+        player->normalVelocity.x = -1;
 
     else if(keyboardState[SDL_SCANCODE_RIGHT])
-        player.position.x += PLAYER_SPEED;
+        player->normalVelocity.x = 1;
 
+    else
+        player->normalVelocity.x = 0;
 
+    if(keyboardState[SDL_SCANCODE_SPACE]) {
+        ball->position.x = player->position.x + center(player->size, ball->size);
+        ball->position.y = player->position.y;
+    }
 }
 
 void physicsCalculations() {
-
-
-
+    updatePhysics(ball);
+    updatePhysics(player);
 }
 
 void graphicsCalculations() {
 
     SDL_FillRect(screen, NULL, backgroundColor);
 
-    SDL_FillRect(player.surface, NULL, playerColor);
-    SDL_BlitSurface(player.surface, NULL, screen, &player.position);
+    SDL_FillRect(player->surface, NULL, playerColor);
+    SDL_BlitSurface(player->surface, NULL, screen, &player->position);
+
+    SDL_FillRect(ball->surface, NULL, ballColor);
+    SDL_BlitSurface(ball->surface, NULL, screen, &ball->position);
 
 }
 

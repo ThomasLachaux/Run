@@ -38,19 +38,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2018.3.3\bin\cmake\win\bin\cmake.exe"
+CMAKE_COMMAND = "D:\Programs\JetBrains\CLion 2018.2.4\bin\cmake\win\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "C:\Program Files\JetBrains\CLion 2018.3.3\bin\cmake\win\bin\cmake.exe" -E remove -f
+RM = "D:\Programs\JetBrains\CLion 2018.2.4\bin\cmake\win\bin\cmake.exe" -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\TGE\Documents\ClionProjects\SpaceShooter
+CMAKE_SOURCE_DIR = D:\Projets\SpaceShooter
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\TGE\Documents\ClionProjects\SpaceShooter\cmake-build-debug
+CMAKE_BINARY_DIR = D:\Projets\SpaceShooter\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -58,7 +58,7 @@ CMAKE_BINARY_DIR = C:\Users\TGE\Documents\ClionProjects\SpaceShooter\cmake-build
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	"C:\Program Files\JetBrains\CLion 2018.3.3\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available."
+	"D:\Programs\JetBrains\CLion 2018.2.4\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available."
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -69,7 +69,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	"C:\Program Files\JetBrains\CLion 2018.3.3\bin\cmake\win\bin\cmake.exe" -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	"D:\Programs\JetBrains\CLion 2018.2.4\bin\cmake\win\bin\cmake.exe" -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -79,9 +79,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\TGE\Documents\ClionProjects\SpaceShooter\cmake-build-debug\CMakeFiles C:\Users\TGE\Documents\ClionProjects\SpaceShooter\cmake-build-debug\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Projets\SpaceShooter\cmake-build-debug\CMakeFiles D:\Projets\SpaceShooter\cmake-build-debug\CMakeFiles\progress.marks
 	$(MAKE) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\TGE\Documents\ClionProjects\SpaceShooter\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Projets\SpaceShooter\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -149,6 +149,33 @@ src/body.c.s:
 	$(MAKE) -f CMakeFiles\SpaceShooter.dir\build.make CMakeFiles/SpaceShooter.dir/src/body.c.s
 .PHONY : src/body.c.s
 
+src/game.obj: src/game.c.obj
+
+.PHONY : src/game.obj
+
+# target to build an object file
+src/game.c.obj:
+	$(MAKE) -f CMakeFiles\SpaceShooter.dir\build.make CMakeFiles/SpaceShooter.dir/src/game.c.obj
+.PHONY : src/game.c.obj
+
+src/game.i: src/game.c.i
+
+.PHONY : src/game.i
+
+# target to preprocess a source file
+src/game.c.i:
+	$(MAKE) -f CMakeFiles\SpaceShooter.dir\build.make CMakeFiles/SpaceShooter.dir/src/game.c.i
+.PHONY : src/game.c.i
+
+src/game.s: src/game.c.s
+
+.PHONY : src/game.s
+
+# target to generate assembly for a file
+src/game.c.s:
+	$(MAKE) -f CMakeFiles\SpaceShooter.dir\build.make CMakeFiles/SpaceShooter.dir/src/game.c.s
+.PHONY : src/game.c.s
+
 src/main.obj: src/main.c.obj
 
 .PHONY : src/main.obj
@@ -188,6 +215,9 @@ help:
 	@echo ... src/body.obj
 	@echo ... src/body.i
 	@echo ... src/body.s
+	@echo ... src/game.obj
+	@echo ... src/game.i
+	@echo ... src/game.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s

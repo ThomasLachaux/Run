@@ -4,8 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/body.c" "C:/Users/TGE/Documents/ClionProjects/SpaceShooter/cmake-build-debug/CMakeFiles/SpaceShooter.dir/src/body.c.obj"
-  "C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/main.c" "C:/Users/TGE/Documents/ClionProjects/SpaceShooter/cmake-build-debug/CMakeFiles/SpaceShooter.dir/src/main.c.obj"
+  "D:/Projets/SpaceShooter/src/body.c" "D:/Projets/SpaceShooter/cmake-build-debug/CMakeFiles/SpaceShooter.dir/src/body.c.obj"
+  "D:/Projets/SpaceShooter/src/game.c" "D:/Projets/SpaceShooter/cmake-build-debug/CMakeFiles/SpaceShooter.dir/src/game.c.obj"
+  "D:/Projets/SpaceShooter/src/main.c" "D:/Projets/SpaceShooter/cmake-build-debug/CMakeFiles/SpaceShooter.dir/src/main.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

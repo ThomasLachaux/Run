@@ -1,3 +1,5 @@
+# Si git bash présent dans le PATH de Windows, ajouter l'argument -DCMAKE_SH="CMAKE_SH-NOTFOUND" pour compiler correctement le projet
+
 cmake_minimum_required(VERSION 3.13)
 project(SpaceShooter C)
 
@@ -9,6 +11,6 @@ link_directories(${PROJECT_SOURCE_DIR}/lib)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(SpaceShooter src/main.c src/body.c src/body.h)
+add_executable(SpaceShooter src/main.c src/body.c src/game.c)
 
 target_link_libraries(SpaceShooter mingw32 SDL2main SDL2)
