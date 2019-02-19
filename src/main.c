@@ -5,10 +5,6 @@
 #include "game.h"
 #include "body.h"
 
-SDL_Window *window = NULL;
-SDL_Surface *screen = NULL;
-SDL_Event e;
-
 Body *player = NULL;
 Body *ball = NULL;
 
@@ -16,17 +12,10 @@ void handleEvents(int *quit, const Uint8 *keyboardState);
 void physicsCalculations();
 void graphicsCalculations();
 
-int center(int a, int b) {
-    return a / 2 - b / 2;
-}
-
 int main(int argc, char *argv[]) {
 
+    initGame();
     const Uint8 *keyboardState = SDL_GetKeyboardState(NULL);
-    SDL_Init(SDL_INIT_VIDEO);
-
-    window = SDL_CreateWindow("Space Shooter", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-    screen = SDL_GetWindowSurface(window);
 
     int quit = 0;
 
@@ -62,19 +51,19 @@ void handleEvents(int *quit, const Uint8 *keyboardState) {
     SDL_PumpEvents();
 
     if(keyboardState[SDL_SCANCODE_UP])
-        player->normalVelocity.y = -1;
+        moveUp(player);
 
     else if(keyboardState[SDL_SCANCODE_DOWN])
-        player->normalVelocity.y = 1;
+        moveDown(player);
 
     else
         player->normalVelocity.y = 0;
 
     if(keyboardState[SDL_SCANCODE_LEFT])
-        player->normalVelocity.x = -1;
+        moveLeft(player);
 
     else if(keyboardState[SDL_SCANCODE_RIGHT])
-        player->normalVelocity.x = 1;
+        moveRight(player);
 
     else
         player->normalVelocity.x = 0;

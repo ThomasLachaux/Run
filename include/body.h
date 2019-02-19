@@ -12,11 +12,16 @@ struct Body {
 };
 typedef struct Body Body;
 
+
 Body *createBody(int size, int x, int y, int velocity);
 void updatePhysics(Body *body);
 void calculatePosition(Body *body);
 void limitPosition(Body *body);
 void moveToward(Body *body, int normalX, int normalY);
+void moveUp(Body *body);
+void moveDown(Body *body);
+void moveLeft(Body *body);
+void moveRight(Body *body);
 void freeBody(Body *body);
 
 #endif

@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_GENERATOR "MinGW Makefiles")
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "D:/Programs/JetBrains/CLion 2018.2.4/bin/cmake/win/share/cmake-3.13/Modules/CMakeCInformation.cmake"
+  "D:/Programs/JetBrains/CLion 2018.2.4/bin/cmake/win/share/cmake-3.13/Modules/CMakeCXXInformation.cmake"
   "D:/Programs/JetBrains/CLion 2018.2.4/bin/cmake/win/share/cmake-3.13/Modules/CMakeCommonLanguageInclude.cmake"
   "D:/Programs/JetBrains/CLion 2018.2.4/bin/cmake/win/share/cmake-3.13/Modules/CMakeExtraGeneratorDetermineCompilerMacrosAndIncludeDirs.cmake"
   "D:/Programs/JetBrains/CLion 2018.2.4/bin/cmake/win/share/cmake-3.13/Modules/CMakeFindCodeBlocks.cmake"
@@ -19,9 +20,12 @@ set(CMAKE_MAKEFILE_DEPENDS
   "D:/Programs/JetBrains/CLion 2018.2.4/bin/cmake/win/share/cmake-3.13/Modules/CMakeSystemSpecificInitialize.cmake"
   "D:/Programs/JetBrains/CLion 2018.2.4/bin/cmake/win/share/cmake-3.13/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
   "D:/Programs/JetBrains/CLion 2018.2.4/bin/cmake/win/share/cmake-3.13/Modules/Compiler/GNU-C.cmake"
+  "D:/Programs/JetBrains/CLion 2018.2.4/bin/cmake/win/share/cmake-3.13/Modules/Compiler/GNU-CXX.cmake"
   "D:/Programs/JetBrains/CLion 2018.2.4/bin/cmake/win/share/cmake-3.13/Modules/Compiler/GNU.cmake"
   "D:/Programs/JetBrains/CLion 2018.2.4/bin/cmake/win/share/cmake-3.13/Modules/Platform/Windows-GNU-C-ABI.cmake"
   "D:/Programs/JetBrains/CLion 2018.2.4/bin/cmake/win/share/cmake-3.13/Modules/Platform/Windows-GNU-C.cmake"
+  "D:/Programs/JetBrains/CLion 2018.2.4/bin/cmake/win/share/cmake-3.13/Modules/Platform/Windows-GNU-CXX-ABI.cmake"
+  "D:/Programs/JetBrains/CLion 2018.2.4/bin/cmake/win/share/cmake-3.13/Modules/Platform/Windows-GNU-CXX.cmake"
   "D:/Programs/JetBrains/CLion 2018.2.4/bin/cmake/win/share/cmake-3.13/Modules/Platform/Windows-GNU.cmake"
   "D:/Programs/JetBrains/CLion 2018.2.4/bin/cmake/win/share/cmake-3.13/Modules/Platform/Windows-windres.cmake"
   "D:/Programs/JetBrains/CLion 2018.2.4/bin/cmake/win/share/cmake-3.13/Modules/Platform/Windows.cmake"
@@ -29,6 +33,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "D:/Programs/JetBrains/CLion 2018.2.4/bin/cmake/win/share/cmake-3.13/Modules/ProcessorCount.cmake"
   "../CMakeLists.txt"
   "CMakeFiles/3.13.2/CMakeCCompiler.cmake"
+  "CMakeFiles/3.13.2/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.13.2/CMakeRCCompiler.cmake"
   "CMakeFiles/3.13.2/CMakeSystem.cmake"
   )

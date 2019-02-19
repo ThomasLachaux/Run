@@ -70,24 +70,10 @@ CMakeFiles/SpaceShooter.dir/src/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SpaceShooter.dir/src/main.c.s"
 	D:\Programs\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\Projets\SpaceShooter\src\main.c -o CMakeFiles\SpaceShooter.dir\src\main.c.s
 
-CMakeFiles/SpaceShooter.dir/src/body.c.obj: CMakeFiles/SpaceShooter.dir/flags.make
-CMakeFiles/SpaceShooter.dir/src/body.c.obj: CMakeFiles/SpaceShooter.dir/includes_C.rsp
-CMakeFiles/SpaceShooter.dir/src/body.c.obj: ../src/body.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Projets\SpaceShooter\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/SpaceShooter.dir/src/body.c.obj"
-	D:\Programs\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\SpaceShooter.dir\src\body.c.obj   -c D:\Projets\SpaceShooter\src\body.c
-
-CMakeFiles/SpaceShooter.dir/src/body.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SpaceShooter.dir/src/body.c.i"
-	D:\Programs\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\Projets\SpaceShooter\src\body.c > CMakeFiles\SpaceShooter.dir\src\body.c.i
-
-CMakeFiles/SpaceShooter.dir/src/body.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SpaceShooter.dir/src/body.c.s"
-	D:\Programs\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\Projets\SpaceShooter\src\body.c -o CMakeFiles\SpaceShooter.dir\src\body.c.s
-
 CMakeFiles/SpaceShooter.dir/src/game.c.obj: CMakeFiles/SpaceShooter.dir/flags.make
 CMakeFiles/SpaceShooter.dir/src/game.c.obj: CMakeFiles/SpaceShooter.dir/includes_C.rsp
 CMakeFiles/SpaceShooter.dir/src/game.c.obj: ../src/game.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Projets\SpaceShooter\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/SpaceShooter.dir/src/game.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Projets\SpaceShooter\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/SpaceShooter.dir/src/game.c.obj"
 	D:\Programs\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\SpaceShooter.dir\src\game.c.obj   -c D:\Projets\SpaceShooter\src\game.c
 
 CMakeFiles/SpaceShooter.dir/src/game.c.i: cmake_force
@@ -98,18 +84,32 @@ CMakeFiles/SpaceShooter.dir/src/game.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SpaceShooter.dir/src/game.c.s"
 	D:\Programs\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\Projets\SpaceShooter\src\game.c -o CMakeFiles\SpaceShooter.dir\src\game.c.s
 
+CMakeFiles/SpaceShooter.dir/src/body.c.obj: CMakeFiles/SpaceShooter.dir/flags.make
+CMakeFiles/SpaceShooter.dir/src/body.c.obj: CMakeFiles/SpaceShooter.dir/includes_C.rsp
+CMakeFiles/SpaceShooter.dir/src/body.c.obj: ../src/body.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Projets\SpaceShooter\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/SpaceShooter.dir/src/body.c.obj"
+	D:\Programs\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\SpaceShooter.dir\src\body.c.obj   -c D:\Projets\SpaceShooter\src\body.c
+
+CMakeFiles/SpaceShooter.dir/src/body.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SpaceShooter.dir/src/body.c.i"
+	D:\Programs\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\Projets\SpaceShooter\src\body.c > CMakeFiles\SpaceShooter.dir\src\body.c.i
+
+CMakeFiles/SpaceShooter.dir/src/body.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SpaceShooter.dir/src/body.c.s"
+	D:\Programs\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\Projets\SpaceShooter\src\body.c -o CMakeFiles\SpaceShooter.dir\src\body.c.s
+
 # Object files for target SpaceShooter
 SpaceShooter_OBJECTS = \
 "CMakeFiles/SpaceShooter.dir/src/main.c.obj" \
-"CMakeFiles/SpaceShooter.dir/src/body.c.obj" \
-"CMakeFiles/SpaceShooter.dir/src/game.c.obj"
+"CMakeFiles/SpaceShooter.dir/src/game.c.obj" \
+"CMakeFiles/SpaceShooter.dir/src/body.c.obj"
 
 # External object files for target SpaceShooter
 SpaceShooter_EXTERNAL_OBJECTS =
 
 SpaceShooter.exe: CMakeFiles/SpaceShooter.dir/src/main.c.obj
-SpaceShooter.exe: CMakeFiles/SpaceShooter.dir/src/body.c.obj
 SpaceShooter.exe: CMakeFiles/SpaceShooter.dir/src/game.c.obj
+SpaceShooter.exe: CMakeFiles/SpaceShooter.dir/src/body.c.obj
 SpaceShooter.exe: CMakeFiles/SpaceShooter.dir/build.make
 SpaceShooter.exe: CMakeFiles/SpaceShooter.dir/linklibs.rsp
 SpaceShooter.exe: CMakeFiles/SpaceShooter.dir/objects1.rsp

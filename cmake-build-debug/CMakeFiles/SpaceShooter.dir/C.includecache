@@ -611,12 +611,24 @@ SDL2/SDL.h
 D:/Projets/SpaceShooter/src/body.c
 stdlib.h
 -
-body.h
-D:/Projets/SpaceShooter/src/body.h
 game.h
 D:/Projets/SpaceShooter/src/game.h
+body.h
+D:/Projets/SpaceShooter/src/body.h
 
 D:/Projets/SpaceShooter/src/game.c
 game.h
 D:/Projets/SpaceShooter/src/game.h
+
+D:/Projets/SpaceShooter/src/main.c
+stdlib.h
+-
+stdio.h
+-
+SDL2/SDL.h
+-
+game.h
+D:/Projets/SpaceShooter/src/game.h
+body.h
+D:/Projets/SpaceShooter/src/body.h
 

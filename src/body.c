@@ -1,7 +1,7 @@
 #include <stdlib.h>
 
-#include "body.h"
 #include "game.h"
+#include "body.h"
 
 Body *createBody(int size, int x, int y, int velocity) {
 
@@ -25,6 +25,24 @@ void moveToward(Body *body, int normalX, int normalY) {
     body->position.x += normalX * body->velocity;
     body->position.y += normalY * body->velocity;
 }
+
+void moveUp(Body *body) {
+    body->normalVelocity.y = -1;
+}
+
+void moveDown(Body *body) {
+    body->normalVelocity.y = 1;
+}
+
+void moveRight(Body *body) {
+    body->normalVelocity.x = 1;
+}
+
+void moveLeft(Body *body) {
+    body->normalVelocity.x = -1;
+}
+
+
 
 void updatePhysics(Body *body) {
     calculatePosition(body);

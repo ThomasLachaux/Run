@@ -16,8 +16,14 @@ static const Uint32 backgroundColor = 0x11CE70;
 static const Uint32 playerColor = 0x000000;
 static const Uint32 ballColor = 0xFFFFFF;
 
+SDL_Window *window;
+SDL_Surface *screen;
+SDL_Event e;
+
+void initGame();
 int min(int x, int y);
 int max(int x, int y);
 int clamp(int lower, int x, int upper);
+int center(int a, int b);
 
 #endif

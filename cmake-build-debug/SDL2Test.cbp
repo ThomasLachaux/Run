@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6"/>
 	<Project>
-		<Option title="SpaceShooter"/>
+		<Option title="SDL2Test"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
 		<Option virtualFolders="CMake Files\;"/>
@@ -82,6 +82,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/Projets/SpaceShooter/include/body.h">
+			<Option target="SpaceShooter"/>
+		</Unit>
+		<Unit filename="D:/Projets/SpaceShooter/include/game.h">
+			<Option target="SpaceShooter"/>
+		</Unit>
 		<Unit filename="D:/Projets/SpaceShooter/src/body.c">
 			<Option target="SpaceShooter"/>
 		</Unit>
@@ -92,6 +98,9 @@
 			<Option target="SpaceShooter"/>
 		</Unit>
 		<Unit filename="D:/Projets/SpaceShooter/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="D:/Projets/SpaceShooter/SDL2Config.cmake">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
