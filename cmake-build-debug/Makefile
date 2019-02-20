@@ -203,6 +203,33 @@ src/main.c.s:
 	$(MAKE) -f CMakeFiles\SpaceShooter.dir\build.make CMakeFiles/SpaceShooter.dir/src/main.c.s
 .PHONY : src/main.c.s
 
+src/world.obj: src/world.c.obj
+
+.PHONY : src/world.obj
+
+# target to build an object file
+src/world.c.obj:
+	$(MAKE) -f CMakeFiles\SpaceShooter.dir\build.make CMakeFiles/SpaceShooter.dir/src/world.c.obj
+.PHONY : src/world.c.obj
+
+src/world.i: src/world.c.i
+
+.PHONY : src/world.i
+
+# target to preprocess a source file
+src/world.c.i:
+	$(MAKE) -f CMakeFiles\SpaceShooter.dir\build.make CMakeFiles/SpaceShooter.dir/src/world.c.i
+.PHONY : src/world.c.i
+
+src/world.s: src/world.c.s
+
+.PHONY : src/world.s
+
+# target to generate assembly for a file
+src/world.c.s:
+	$(MAKE) -f CMakeFiles\SpaceShooter.dir\build.make CMakeFiles/SpaceShooter.dir/src/world.c.s
+.PHONY : src/world.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -221,6 +248,9 @@ help:
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
+	@echo ... src/world.obj
+	@echo ... src/world.i
+	@echo ... src/world.s
 .PHONY : help
 
 

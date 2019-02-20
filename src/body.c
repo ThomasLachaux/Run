@@ -3,7 +3,7 @@
 #include "game.h"
 #include "body.h"
 
-Body *createBody(int size, int x, int y, int velocity) {
+Body *createBody(int size, int x, int y, int velocity, Uint32 color) {
 
     Body *body = malloc(sizeof(Body));
 
@@ -17,6 +17,7 @@ Body *createBody(int size, int x, int y, int velocity) {
     body->normalVelocity.y = 0;
 
     body->velocity = velocity * DELTA_TIME / VELOCITY_NORMALIZE;
+    body->color = color;
 
     return body;
 }
@@ -42,12 +43,15 @@ void moveLeft(Body *body) {
     body->normalVelocity.x = -1;
 }
 
-
-
-void updatePhysics(Body *body) {
+void updatePhysicsBody(Body *body) {
     calculatePosition(body);
 
     limitPosition(body);
+}
+
+void drawBody(Body *body) {
+    SDL_FillRect(body->surface, NULL, body->color);
+    SDL_BlitSurface(body->surface, NULL, screen, &body->position);
 }
 
 void calculatePosition(Body *body) {
@@ -60,7 +64,7 @@ void limitPosition(Body *body) {
     body->position.y = clamp(0, body->position.y, SCREEN_HEIGHT - body->size);
 }
 
-void freeBody(Body *body) {
+void destroyBody(Body *body) {
     SDL_FreeSurface(body->surface);
     free(body);
 }

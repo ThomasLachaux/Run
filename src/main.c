@@ -4,13 +4,17 @@
 
 #include "game.h"
 #include "body.h"
+#include "world.h"
 
 Body *player = NULL;
 Body *ball = NULL;
+Body *enemies[50];
+
+int i;
 
 void handleEvents(int *quit, const Uint8 *keyboardState);
-void physicsCalculations();
-void graphicsCalculations();
+
+void drawBackground();
 
 int main(int argc, char *argv[]) {
 
@@ -19,22 +23,35 @@ int main(int argc, char *argv[]) {
 
     int quit = 0;
 
-    player = createBody(20, SCREEN_WIDTH / 2, SCREEN_HEIGHT * 3 / 4, 4);
+    player = createBody(20, SCREEN_WIDTH / 2, SCREEN_HEIGHT * 3 / 4, 4, playerColor);
 
-    ball = createBody(5, player->position.x + 5, player->position.y + 5, 5);
+    ball = createBody(5, player->position.x + 5, player->position.y + 5, 5, ballColor);
     ball->normalVelocity.y = -1;
+
+    World *world = createWorld();
+
+    addBodyToWorld(world, player);
+    addBodyToWorld(world, ball);
+
+    for(i = 0; i < 10; i++) {
+        enemies[i] = createBody(10, 20 + 12 * i, 20, 3, 0xCC0000);
+        enemies[i]->normalVelocity.y = 1;
+        addBodyToWorld(world, enemies[i]);
+    }
 
     while(!quit) {
         handleEvents(&quit, keyboardState);
-        physicsCalculations();
-        graphicsCalculations();
+        updateWorldPhysics(world);
+
+        drawBackground();
+        drawWorld(world);
 
         SDL_UpdateWindowSurface(window);
         SDL_Delay(DELTA_TIME);
     }
 
-    freeBody(player);
-    freeBody(ball);
+    destroyWorld(world);
+    SDL_DestroyWindow(window);
 
     SDL_Quit();
     return 0;
@@ -74,21 +91,6 @@ void handleEvents(int *quit, const Uint8 *keyboardState) {
     }
 }
 
-void physicsCalculations() {
-    updatePhysics(ball);
-    updatePhysics(player);
-}
-
-void graphicsCalculations() {
-
+void drawBackground() {
     SDL_FillRect(screen, NULL, backgroundColor);
-
-    SDL_FillRect(player->surface, NULL, playerColor);
-    SDL_BlitSurface(player->surface, NULL, screen, &player->position);
-
-    SDL_FillRect(ball->surface, NULL, ballColor);
-    SDL_BlitSurface(ball->surface, NULL, screen, &ball->position);
-
 }
-
-

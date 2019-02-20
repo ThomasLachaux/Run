@@ -82,6 +82,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/Projets/SpaceShooter/include/world.h">
+			<Option target="SpaceShooter"/>
+		</Unit>
 		<Unit filename="D:/Projets/SpaceShooter/src/body.c">
 			<Option target="SpaceShooter"/>
 		</Unit>
@@ -89,6 +92,9 @@
 			<Option target="SpaceShooter"/>
 		</Unit>
 		<Unit filename="D:/Projets/SpaceShooter/src/main.c">
+			<Option target="SpaceShooter"/>
+		</Unit>
+		<Unit filename="D:/Projets/SpaceShooter/src/world.c">
 			<Option target="SpaceShooter"/>
 		</Unit>
 		<Unit filename="D:/Projets/SpaceShooter/CMakeLists.txt">

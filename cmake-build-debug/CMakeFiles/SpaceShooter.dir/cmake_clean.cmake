@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/SpaceShooter.dir/src/main.c.obj"
   "CMakeFiles/SpaceShooter.dir/src/game.c.obj"
   "CMakeFiles/SpaceShooter.dir/src/body.c.obj"
+  "CMakeFiles/SpaceShooter.dir/src/world.c.obj"
   "SpaceShooter.pdb"
   "SpaceShooter.exe"
   "SpaceShooter.exe.manifest"

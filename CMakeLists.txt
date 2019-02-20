@@ -7,7 +7,7 @@ set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
 include_directories(${PROJECT_SOURCE_DIR}/include)
 link_directories(${PROJECT_SOURCE_DIR}/lib)
 
-set(SOURCE_FILES src/main.c src/game.c src/body.c)
-add_executable(SpaceShooter ${SOURCE_FILES})
+set(SOURCE_FILES src/main.c src/game.c src/body.c src/world.c include/world.h)
+add_executable(SpaceShooter ${SOURCE_FILES} src/world.c include/world.h)
 
 target_link_libraries(SpaceShooter mingw32 SDL2main SDL2)
