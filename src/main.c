@@ -8,7 +8,7 @@
 
 Body *player = NULL;
 Body *ball = NULL;
-Body *enemies[50];
+Body *enemy = NULL;
 
 int i;
 
@@ -23,9 +23,9 @@ int main(int argc, char *argv[]) {
 
     int quit = 0;
 
-    player = createBody(20, SCREEN_WIDTH / 2, SCREEN_HEIGHT * 3 / 4, 4, playerColor);
+    player = createBody(20, SCREEN_WIDTH / 2, SCREEN_HEIGHT * 3 / 4, 4, playerColor, Player);
 
-    ball = createBody(5, player->position.x + 5, player->position.y + 5, 5, ballColor);
+    ball = createBody(5, player->position.x + 5, player->position.y + 5, 5, ballColor, Ball);
     ball->normalVelocity.y = -1;
 
     World *world = createWorld();
@@ -33,10 +33,11 @@ int main(int argc, char *argv[]) {
     addBodyToWorld(world, player);
     addBodyToWorld(world, ball);
 
-    for(i = 0; i < 10; i++) {
-        enemies[i] = createBody(10, 20 + 12 * i, 20, 3, 0xCC0000);
-        enemies[i]->normalVelocity.y = 1;
-        addBodyToWorld(world, enemies[i]);
+    for(i = 0; i < SCREEN_WIDTH; i+= 20) {
+
+        enemy = createBody(10, i, 20, 1, 0xCC0000, Enemy);
+        enemy->normalVelocity.y = 1;
+        addBodyToWorld(world, enemy);
     }
 
     while(!quit) {

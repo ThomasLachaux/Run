@@ -1,9 +1,10 @@
 #include <stdlib.h>
+#include <math.h>
 
 #include "game.h"
 #include "body.h"
 
-Body *createBody(int size, int x, int y, int velocity, Uint32 color) {
+Body *createBody(int size, int x, int y, float velocity, Uint32 color, Layer layer) {
 
     Body *body = malloc(sizeof(Body));
 
@@ -19,12 +20,9 @@ Body *createBody(int size, int x, int y, int velocity, Uint32 color) {
     body->velocity = velocity * DELTA_TIME / VELOCITY_NORMALIZE;
     body->color = color;
 
-    return body;
-}
+    body->layer = layer;
 
-void moveToward(Body *body, int normalX, int normalY) {
-    body->position.x += normalX * body->velocity;
-    body->position.y += normalY * body->velocity;
+    return body;
 }
 
 void moveUp(Body *body) {
@@ -43,7 +41,7 @@ void moveLeft(Body *body) {
     body->normalVelocity.x = -1;
 }
 
-void updatePhysicsBody(Body *body) {
+void updateBodyPhysics(Body *body) {
     calculatePosition(body);
 
     limitPosition(body);
@@ -55,8 +53,8 @@ void drawBody(Body *body) {
 }
 
 void calculatePosition(Body *body) {
-    body->position.x += body->normalVelocity.x * body->velocity;
-    body->position.y += body->normalVelocity.y * body->velocity;
+    body->position.x += lroundf(body->normalVelocity.x * body->velocity);
+    body->position.y += lroundf(body->normalVelocity.y * body->velocity);
 }
 
 void limitPosition(Body *body) {

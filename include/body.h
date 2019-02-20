@@ -3,23 +3,29 @@
 
 #include <SDL2/SDL.h>
 
+enum Layer {
+    Player, Enemy, Ball
+};
+typedef enum Layer Layer;
+
 struct Body {
-    int velocity;
+    float velocity;
     int size;
     Uint32 color;
     SDL_Surface *surface;
     SDL_Rect position;
     SDL_Rect normalVelocity;
+    Layer layer;
 };
 typedef struct Body Body;
 
 
-Body *createBody(int size, int x, int y, int velocity, Uint32 color);
-void updatePhysicsBody(Body *body);
+Body *createBody(int size, int x, int y, float velocity, Uint32 color, Layer layer);
+void updateBodyPhysics(Body *body);
 void drawBody(Body *body);
 void calculatePosition(Body *body);
 void limitPosition(Body *body);
-void moveToward(Body *body, int normalX, int normalY);
+
 void moveUp(Body *body);
 void moveDown(Body *body);
 void moveLeft(Body *body);

@@ -43,7 +43,7 @@ void forEachBody(World *world, void (*callback)(Body *body)) {
 }
 
 void updateWorldPhysics(World *world) {
-    forEachBody(world, updatePhysicsBody);
+    forEachBody(world, updateBodyPhysics);
 }
 
 void drawWorld(World *world) {
