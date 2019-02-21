@@ -1,3 +1,3 @@
-D:/Projets/SpaceShooter/cmake-build-debug/CMakeFiles/SpaceShooter.dir
-D:/Projets/SpaceShooter/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/Projets/SpaceShooter/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/TGE/Documents/ClionProjects/SpaceShooter/cmake-build-debug/CMakeFiles/SpaceShooter.dir
+C:/Users/TGE/Documents/ClionProjects/SpaceShooter/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/TGE/Documents/ClionProjects/SpaceShooter/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -4,15 +4,16 @@
 #include "game.h"
 #include "body.h"
 
-Body *createBody(int size, int x, int y, float velocity, Uint32 color, Layer layer) {
+Body *createBody(int x, int y, int w, int h, float velocity, Uint32 color, Layer layer) {
 
     Body *body = malloc(sizeof(Body));
 
-    body->surface = SDL_CreateRGBSurface(0, size, size, 32, 0, 0, 0, 0);
+    body->surface = SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
 
-    body->position.x = x;
-    body->position.y = y;
-    body->size = size;
+    body->transform.x = x;
+    body->transform.y = y;
+    body->transform.w = w;
+    body->transform.h = h;
 
     body->normalVelocity.x = 0;
     body->normalVelocity.y = 0;
@@ -47,23 +48,23 @@ void updateBodyPhysics(Body *body) {
 
 void drawBody(SDL_Surface *screen, Body *body) {
     SDL_FillRect(body->surface, NULL, body->color);
-    SDL_BlitSurface(body->surface, NULL, screen, &body->position);
+    SDL_BlitSurface(body->surface, NULL, screen, &body->transform);
 }
 
 void calculatePosition(Body *body) {
-    body->position.x += lroundf(body->normalVelocity.x * body->velocity);
-    body->position.y += lroundf(body->normalVelocity.y * body->velocity);
+    body->transform.x += lroundf(body->normalVelocity.x * body->velocity);
+    body->transform.y += lroundf(body->normalVelocity.y * body->velocity);
 }
 
 void limitPosition(Body *body) {
-    body->position.x = clamp(0, body->position.x, SCREEN_WIDTH - body->size);
-    body->position.y = clamp(0, body->position.y, SCREEN_HEIGHT - body->size);
+    body->transform.x = clamp(0, body->transform.x, SCREEN_WIDTH - body->transform.w);
+    body->transform.y = clamp(0, body->transform.y, SCREEN_HEIGHT - body->transform.h);
 }
 
 bool isOffScreen(Body *body) {
     return (
-            body->position.x < 0 || body->position.x > SCREEN_WIDTH - body->size ||
-            body->position.y < 0 || body->position.y > SCREEN_HEIGHT - body->size);
+            body->transform.x < 0 || body->transform.x > SCREEN_WIDTH - body->transform.w ||
+            body->transform.y < 0 || body->transform.y > SCREEN_HEIGHT - body->transform.h);
 }
 
 void destroyBody(Body *body) {

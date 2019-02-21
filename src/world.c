@@ -4,9 +4,6 @@
 
 #include "world.h"
 
-
-
-
 World *createWorld() {
     World *world = malloc(sizeof(World));
     world->first = NULL;
@@ -132,7 +129,7 @@ void destroyBodyFromWorld(World *world, Body *body) {
     free(to_delete);
 }
 
-void registerCollision(World *world, Layer layerA, Layer layerB, void (*callback)(World *, Body *, Body *)) {
+void registerCollision(World *world, Layer layerA, Layer layerB, bool (*callback)(World *, Body *, Body *)) {
 
     Element *elementA, *elementB;
     Body *bodyA, *bodyB;
@@ -147,6 +144,8 @@ void registerCollision(World *world, Layer layerA, Layer layerB, void (*callback
 
             elementB = world->first;
 
+            Element *test = NULL;
+
             while (elementB != NULL) {
 
                 // Recherche dans le layerB
@@ -157,10 +156,10 @@ void registerCollision(World *world, Layer layerA, Layer layerB, void (*callback
 
                     // Si collision, alors appel du callback
                     if (
-                            bodyA->position.x < bodyB->position.x + bodyB->size &&
-                            bodyA->position.x + bodyA->size > bodyB->position.x &&
-                            bodyA->position.y < bodyB->position.y + bodyB->size &&
-                            bodyA->size + bodyA->position.y > bodyB->position.y) {
+                            bodyA->transform.x < bodyB->transform.x + bodyB->transform.w &&
+                            bodyA->transform.x + bodyA->transform.w > bodyB->transform.x &&
+                            bodyA->transform.y < bodyB->transform.y + bodyB->transform.h &&
+                            bodyA->transform.h + bodyA->transform.y > bodyB->transform.y) {
 
                         (*callback)(world, bodyA, bodyB);
                     }
@@ -168,7 +167,6 @@ void registerCollision(World *world, Layer layerA, Layer layerB, void (*callback
 
                 elementB = elementB->next;
             }
-
         }
         elementA = elementA->next;
     }

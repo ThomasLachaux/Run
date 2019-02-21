@@ -620,13 +620,13 @@ game.h
 body.h
 ../include/body.h
 
-D:/Projets/SpaceShooter/src/body.c
+C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/world.c
 stdlib.h
 -
-math.h
+stdio.h
 -
 game.h
-D:/Projets/SpaceShooter/src/game.h
-body.h
-D:/Projets/SpaceShooter/src/body.h
+-
+world.h
+C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/world.h
 

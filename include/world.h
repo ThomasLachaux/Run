@@ -21,7 +21,7 @@ void addBodyToWorld(World *world, Body *body);
 void updateWorldPhysics(World *world);
 void drawWorld(SDL_Surface *screen, World *world);
 void destroyWorld(World *world);
-void registerCollision(World *world, Layer layerA, Layer layerB, void (*callback)(World *, Body *, Body *));
+void registerCollision(World *world, Layer layerA, Layer layerB, bool (*callback)(World *, Body *, Body *));
 void destroyBodyFromWorld(World *world, Body *body);
 
 #endif

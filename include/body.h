@@ -12,17 +12,16 @@ typedef enum Layer Layer;
 
 struct Body {
     float velocity;
-    int size;
     Uint32 color;
     SDL_Surface *surface;
-    SDL_Rect position;
+    SDL_Rect transform;
     SDL_Rect normalVelocity;
     Layer layer;
 };
 typedef struct Body Body;
 
 
-Body *createBody(int size, int x, int y, float velocity, Uint32 color, Layer layer);
+Body *createBody(int x, int y, int w, int h, float velocity, Uint32 color, Layer layer);
 void updateBodyPhysics(Body *body);
 void drawBody(SDL_Surface *screen, Body *body);
 void calculatePosition(Body *body);

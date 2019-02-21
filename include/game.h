@@ -8,8 +8,8 @@
 
 static const int DELTA_TIME = 1000 / FPS;
 
-static const int SCREEN_WIDTH = 640;
-static const int SCREEN_HEIGHT = 480;
+static const int SCREEN_WIDTH = 1080;
+static const int SCREEN_HEIGHT = 720;
 
 static const int VELOCITY_NORMALIZE = 12;
 
@@ -19,12 +19,12 @@ static const Uint32 ballColor = 0xFFFFFF;
 
 //SDL_Window *window;
 //SDL_Surface *screen;
-SDL_Event e;
+//SDL_Event e;
 
 struct Game {
     SDL_Window *window;
     SDL_Surface *screen;
-    SDL_Event *event;
+    SDL_Event event;
     World *world;
     Body *player;
     const Uint8 *keyboardState;
