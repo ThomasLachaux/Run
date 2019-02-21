@@ -47,7 +47,7 @@ void updateBodyPhysics(Body *body) {
     limitPosition(body);
 }
 
-void drawBody(Body *body) {
+void drawBody(SDL_Surface *screen, Body *body) {
     SDL_FillRect(body->surface, NULL, body->color);
     SDL_BlitSurface(body->surface, NULL, screen, &body->position);
 }

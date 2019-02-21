@@ -22,7 +22,7 @@ typedef struct Body Body;
 
 Body *createBody(int size, int x, int y, float velocity, Uint32 color, Layer layer);
 void updateBodyPhysics(Body *body);
-void drawBody(Body *body);
+void drawBody(SDL_Surface *screen, Body *body);
 void calculatePosition(Body *body);
 void limitPosition(Body *body);
 

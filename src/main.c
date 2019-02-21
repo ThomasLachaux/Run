@@ -14,45 +14,42 @@ int i;
 
 void handleEvents(int *quit, const Uint8 *keyboardState);
 
-void drawBackground();
+void drawBackground(SDL_Surface *screen);
 
 int main(int argc, char *argv[]) {
 
-    initGame();
-    const Uint8 *keyboardState = SDL_GetKeyboardState(NULL);
-
-    int quit = 0;
+    Game game = initGame();
 
     player = createBody(20, SCREEN_WIDTH / 2, SCREEN_HEIGHT * 3 / 4, 4, playerColor, Player);
 
     ball = createBody(5, player->position.x + 5, player->position.y + 5, 5, ballColor, Ball);
     ball->normalVelocity.y = -1;
 
-    World *world = createWorld();
+    game.world = createWorld();
 
-    addBodyToWorld(world, player);
-    addBodyToWorld(world, ball);
+    addBodyToWorld(game.world, player);
+    addBodyToWorld(game.world, ball);
 
     for(i = 0; i < SCREEN_WIDTH; i+= 20) {
 
         enemy = createBody(10, i, 20, 1, 0xCC0000, Enemy);
         enemy->normalVelocity.y = 1;
-        addBodyToWorld(world, enemy);
+        addBodyToWorld(game.world, enemy);
     }
 
-    while(!quit) {
-        handleEvents(&quit, keyboardState);
-        updateWorldPhysics(world);
+    while(!game.quit) {
+        handleEvents(&game.quit, game.keyboardState);
+        updateWorldPhysics(game.world);
 
-        drawBackground();
-        drawWorld(world);
+        drawBackground(game.screen);
+        drawWorld(game.screen, game.world);
 
-        SDL_UpdateWindowSurface(window);
+        SDL_UpdateWindowSurface(game.window);
         SDL_Delay(DELTA_TIME);
     }
 
-    destroyWorld(world);
-    SDL_DestroyWindow(window);
+    destroyWorld(game.world);
+    SDL_DestroyWindow(game.window);
 
     SDL_Quit();
     return 0;
@@ -92,6 +89,6 @@ void handleEvents(int *quit, const Uint8 *keyboardState) {
     }
 }
 
-void drawBackground() {
+void drawBackground(SDL_Surface *screen) {
     SDL_FillRect(screen, NULL, backgroundColor);
 }

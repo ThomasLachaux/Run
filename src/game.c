@@ -1,10 +1,19 @@
 #include "game.h"
 
-void initGame() {
+Game initGame() {
+
+    Game game;
+
     SDL_Init(SDL_INIT_VIDEO);
 
-    window = SDL_CreateWindow("Space Shooter", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-    screen = SDL_GetWindowSurface(window);
+    game.window = SDL_CreateWindow("Space Shooter", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+    game.screen = SDL_GetWindowSurface(game.window);
+
+    game.keyboardState = SDL_GetKeyboardState(NULL);
+
+    game.quit = 0;
+
+    return game;
 }
 
 int min(int x, int y) {

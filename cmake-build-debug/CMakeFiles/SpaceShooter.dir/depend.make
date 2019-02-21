@@ -48,6 +48,7 @@ CMakeFiles/SpaceShooter.dir/src/body.c.obj: ../include/SDL2/begin_code.h
 CMakeFiles/SpaceShooter.dir/src/body.c.obj: ../include/SDL2/close_code.h
 CMakeFiles/SpaceShooter.dir/src/body.c.obj: ../include/body.h
 CMakeFiles/SpaceShooter.dir/src/body.c.obj: ../include/game.h
+CMakeFiles/SpaceShooter.dir/src/body.c.obj: ../include/world.h
 CMakeFiles/SpaceShooter.dir/src/body.c.obj: ../src/body.c
 
 CMakeFiles/SpaceShooter.dir/src/game.c.obj: ../include/SDL2/SDL.h
@@ -95,7 +96,9 @@ CMakeFiles/SpaceShooter.dir/src/game.c.obj: ../include/SDL2/SDL_version.h
 CMakeFiles/SpaceShooter.dir/src/game.c.obj: ../include/SDL2/SDL_video.h
 CMakeFiles/SpaceShooter.dir/src/game.c.obj: ../include/SDL2/begin_code.h
 CMakeFiles/SpaceShooter.dir/src/game.c.obj: ../include/SDL2/close_code.h
+CMakeFiles/SpaceShooter.dir/src/game.c.obj: ../include/body.h
 CMakeFiles/SpaceShooter.dir/src/game.c.obj: ../include/game.h
+CMakeFiles/SpaceShooter.dir/src/game.c.obj: ../include/world.h
 CMakeFiles/SpaceShooter.dir/src/game.c.obj: ../src/game.c
 
 CMakeFiles/SpaceShooter.dir/src/main.c.obj: ../include/SDL2/SDL.h

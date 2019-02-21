@@ -607,20 +607,12 @@ SDL2/SDL.h
 ../include/game.h
 SDL2/SDL.h
 -
+world.h
+../include/world.h
 
 ../include/world.h
 body.h
 ../include/body.h
-
-D:/Projets/SpaceShooter/src/body.c
-stdlib.h
--
-math.h
--
-game.h
-D:/Projets/SpaceShooter/src/game.h
-body.h
-D:/Projets/SpaceShooter/src/body.h
 
 D:/Projets/SpaceShooter/src/game.c
 game.h
@@ -637,12 +629,6 @@ game.h
 D:/Projets/SpaceShooter/src/game.h
 body.h
 D:/Projets/SpaceShooter/src/body.h
-world.h
-D:/Projets/SpaceShooter/src/world.h
-
-D:/Projets/SpaceShooter/src/world.c
-stdlib.h
--
 world.h
 D:/Projets/SpaceShooter/src/world.h
 
