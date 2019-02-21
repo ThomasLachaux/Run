@@ -2,6 +2,8 @@
 #define SPACESHOOTER_PLAYER_H
 
 #include <SDL2/SDL.h>
+#include <stdbool.h>
+#include "world.h"
 
 enum Layer {
     Player, Enemy, Ball
@@ -31,5 +33,6 @@ void moveDown(Body *body);
 void moveLeft(Body *body);
 void moveRight(Body *body);
 void destroyBody(Body *body);
+bool isOffScreen(Body *body);
 
 #endif

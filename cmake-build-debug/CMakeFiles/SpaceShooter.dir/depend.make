@@ -197,6 +197,7 @@ CMakeFiles/SpaceShooter.dir/src/world.c.obj: ../include/SDL2/SDL_video.h
 CMakeFiles/SpaceShooter.dir/src/world.c.obj: ../include/SDL2/begin_code.h
 CMakeFiles/SpaceShooter.dir/src/world.c.obj: ../include/SDL2/close_code.h
 CMakeFiles/SpaceShooter.dir/src/world.c.obj: ../include/body.h
+CMakeFiles/SpaceShooter.dir/src/world.c.obj: ../include/game.h
 CMakeFiles/SpaceShooter.dir/src/world.c.obj: ../include/world.h
 CMakeFiles/SpaceShooter.dir/src/world.c.obj: ../src/world.c
 

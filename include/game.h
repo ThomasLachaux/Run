@@ -26,10 +26,10 @@ struct Game {
     SDL_Surface *screen;
     SDL_Event *event;
     World *world;
+    Body *player;
     const Uint8 *keyboardState;
-    int quit;
+    bool quit;
 };
-
 typedef struct Game Game;
 
 Game initGame();

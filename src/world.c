@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <game.h>
 
 #include "world.h"
 
@@ -61,6 +62,13 @@ void updateWorldPhysics(World *world) {
 
     while (current != NULL) {
         updateBodyPhysics(current->body);
+
+        if(current->body->layer == Player)
+            limitPosition(current->body);
+
+        else if(current->body->layer == Ball && isOffScreen(current->body))
+            destroyBodyFromWorld(world, current->body);
+
         current = current->next;
     }
 

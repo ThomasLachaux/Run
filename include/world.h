@@ -1,6 +1,7 @@
 #ifndef SPACESHOOTER_WORLD_H
 #define SPACESHOOTER_WORLD_H
 
+#include "game.h"
 #include "body.h"
 
 struct Element {

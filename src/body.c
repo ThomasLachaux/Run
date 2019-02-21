@@ -43,8 +43,6 @@ void moveLeft(Body *body) {
 
 void updateBodyPhysics(Body *body) {
     calculatePosition(body);
-
-    limitPosition(body);
 }
 
 void drawBody(SDL_Surface *screen, Body *body) {
@@ -60,6 +58,12 @@ void calculatePosition(Body *body) {
 void limitPosition(Body *body) {
     body->position.x = clamp(0, body->position.x, SCREEN_WIDTH - body->size);
     body->position.y = clamp(0, body->position.y, SCREEN_HEIGHT - body->size);
+}
+
+bool isOffScreen(Body *body) {
+    return (
+            body->position.x < 0 || body->position.x > SCREEN_WIDTH - body->size ||
+            body->position.y < 0 || body->position.y > SCREEN_HEIGHT - body->size);
 }
 
 void destroyBody(Body *body) {

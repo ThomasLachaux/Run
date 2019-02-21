@@ -198,5 +198,6 @@ CMakeFiles/SpaceShooter.dir/src/world.c.obj
  ../include/SDL2/begin_code.h
  ../include/SDL2/close_code.h
  ../include/body.h
+ ../include/game.h
  ../include/world.h
  D:/Projets/SpaceShooter/src/world.c

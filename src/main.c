@@ -6,13 +6,9 @@
 #include "body.h"
 #include "world.h"
 
-Body *player = NULL;
-Body *ball = NULL;
-Body *enemy = NULL;
-
 int i;
 
-void handleEvents(int *quit, const Uint8 *keyboardState);
+void handleEvents(Game *game);
 
 void drawBackground(SDL_Surface *screen);
 
@@ -20,16 +16,14 @@ int main(int argc, char *argv[]) {
 
     Game game = initGame();
 
-    player = createBody(20, SCREEN_WIDTH / 2, SCREEN_HEIGHT * 3 / 4, 4, playerColor, Player);
-
-    ball = createBody(5, player->position.x + 5, player->position.y + 5, 5, ballColor, Ball);
-    ball->normalVelocity.y = -1;
+    game.player = createBody(20, SCREEN_WIDTH / 2, SCREEN_HEIGHT * 3 / 4, 4, playerColor, Player);
 
     game.world = createWorld();
 
-    addBodyToWorld(game.world, player);
-    addBodyToWorld(game.world, ball);
+    addBodyToWorld(game.world, game.player);
 
+
+    Body *enemy;
     for(i = 0; i < SCREEN_WIDTH; i+= 20) {
 
         enemy = createBody(10, i, 20, 1, 0xCC0000, Enemy);
@@ -38,7 +32,7 @@ int main(int argc, char *argv[]) {
     }
 
     while(!game.quit) {
-        handleEvents(&game.quit, game.keyboardState);
+        handleEvents(&game);
         updateWorldPhysics(game.world);
 
         drawBackground(game.screen);
@@ -55,38 +49,52 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
+void registerShootInput(Game *game) {
 
-void handleEvents(int *quit, const Uint8 *keyboardState) {
+    static int previous;
+    int current = 0;
+
+    if(game->keyboardState[SDL_SCANCODE_SPACE])
+        current = 1;
+
+    if(current == 1 && previous == 0) {
+        Body *ball = createBody(5, game->player->position.x + 5, game->player->position.y + 5, 5, ballColor, Ball);
+        ball->normalVelocity.y = -1;
+        addBodyToWorld(game->world, ball);
+    }
+
+    previous = current;
+}
+
+
+void handleEvents(Game *game) {
 
     while(SDL_PollEvent(&e) != 0) {
         if(e.type == SDL_QUIT)
-            *quit = 1;
+            game->quit = 1;
     }
 
     SDL_PumpEvents();
 
-    if(keyboardState[SDL_SCANCODE_UP])
-        moveUp(player);
+    if(game->keyboardState[SDL_SCANCODE_UP])
+        moveUp(game->player);
 
-    else if(keyboardState[SDL_SCANCODE_DOWN])
-        moveDown(player);
-
-    else
-        player->normalVelocity.y = 0;
-
-    if(keyboardState[SDL_SCANCODE_LEFT])
-        moveLeft(player);
-
-    else if(keyboardState[SDL_SCANCODE_RIGHT])
-        moveRight(player);
+    else if(game->keyboardState[SDL_SCANCODE_DOWN])
+        moveDown(game->player);
 
     else
-        player->normalVelocity.x = 0;
+        game->player->normalVelocity.y = 0;
 
-    if(keyboardState[SDL_SCANCODE_SPACE]) {
-        ball->position.x = player->position.x + center(player->size, ball->size);
-        ball->position.y = player->position.y;
-    }
+    if(game->keyboardState[SDL_SCANCODE_LEFT])
+        moveLeft(game->player);
+
+    else if(game->keyboardState[SDL_SCANCODE_RIGHT])
+        moveRight(game->player);
+
+    else
+        game->player->normalVelocity.x = 0;
+
+    registerShootInput(game);
 }
 
 void drawBackground(SDL_Surface *screen) {

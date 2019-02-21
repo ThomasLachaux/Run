@@ -11,7 +11,7 @@ Game initGame() {
 
     game.keyboardState = SDL_GetKeyboardState(NULL);
 
-    game.quit = 0;
+    game.quit = false;
 
     return game;
 }
