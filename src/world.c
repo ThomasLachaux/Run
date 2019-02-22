@@ -55,6 +55,8 @@ void onPlayerEnemyCollision(World *world, Body *player, Body *enemy) {
     destroyBodyFromWorld(world, player);
 }
 
+
+
 void updateWorldPhysics(World *world) {
     Element *current = world->first;
 
@@ -67,21 +69,15 @@ void updateWorldPhysics(World *world) {
         else if(current->body->layer == Ball && isOffScreen(current->body))
             destroyBodyFromWorld(world, current->body);
 
+        else if(current->body->layer == Enemy)
+            follow(current->body, world->player);
+
         current = current->next;
     }
 
+    // todo: refaire registerCollision
     registerCollision(world, Enemy, Ball, onEnemyBallCollision);
     registerCollision(world, Player, Enemy, onPlayerEnemyCollision);
-
-    Body *player = world->first->body;
-    Body *enemy = world->first->next->body;
-
-    int diffX = player->transform.x - enemy->transform.x;
-    int diffY = player->transform.y - enemy->transform.y;
-    float distance = sqrtf(powf(diffX, 2) + powf(diffY, 2));
-
-    enemy->normalVelocity.x = diffX / distance;
-    enemy->normalVelocity.y = diffY / distance;
 
     //updateBodyPhysics(enemy);
     //printf("%f - %f\n", diffX / distance, diffY / distance);

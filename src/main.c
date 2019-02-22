@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <SDL2/SDL.h>
+#include <time.h>
 
 #include "game.h"
 #include "body.h"
@@ -12,29 +13,39 @@ void handleEvents(Game *game);
 
 void drawBackground(SDL_Surface *screen);
 
+// todo: reorganiser code
+int ranInt(int min, int max) {
+    return rand() % (max + 1 - min) + min;
+}
+
+Uint32 createEnemy(Uint32 interval, void *world) {
+
+    int x = ranInt(0, 1) ? 0: SCREEN_WIDTH;
+    int y = ranInt(0, SCREEN_HEIGHT);
+
+    Body *enemy = createBody(x, y, 10, 10, 1, 0xCC0000, Enemy);
+    addBodyToWorld(world, enemy);
+
+    return interval;
+}
+
+
 int main(int argc, char *argv[]) {
+
+    srand(time(NULL));
 
     Game game = initGame();
 
-    game.player = createBody(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 3 / 4, 20, 20, 4, playerColor, Player);
 
     game.world = createWorld();
+    game.world->player = createBody(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 3 / 4, playerSize, playerSize, 4, playerColor, Player);
 
-    addBodyToWorld(game.world, game.player);
+    addBodyToWorld(game.world, game.world->player);
 
-    /*Body *enemy;
-    for(i = 0; i < SCREEN_WIDTH; i+= 20) {
+    for(i = 0; i < 6; i++)
+        createEnemy(0, game.world);
 
-        enemy = createBody(i, 20, 10, 10, 1, 0xCC0000, Enemy);
-        enemy->normalVelocity.y = 1;
-        addBodyToWorld(game.world, enemy);
-    }*/
-
-    Body *enemy = createBody(SCREEN_WIDTH / 2, 20, 10, 10, 1, 0xCC0000, Enemy);
-    addBodyToWorld(game.world, enemy);
-
-
-
+    SDL_AddTimer(2000, createEnemy, game.world);
 
     while(!game.quit) {
         handleEvents(&game);
@@ -62,14 +73,17 @@ enum Direction {
 };
 typedef enum Direction Direction;
 
-void shoot(Game *game, float velocityX, float velocityY) {
+void shoot(World *world, float velocityX, float velocityY) {
 
-    Body *ball = createBody(game->player->transform.x, game->player->transform.y, 5, 5, 5, ballColor, Ball);
+    int x = world->player->transform.x - ballSize / 2;
+    int y = world->player->transform.y - ballSize / 2;
 
-    ball->normalVelocity.x = velocityX;
-    ball->normalVelocity.y = velocityY;
+    Body *ball = createBody(x, y, ballSize, ballSize, 5, ballColor, Ball);
 
-    addBodyToWorld(game->world, ball);
+    ball->direction.x = velocityX;
+    ball->direction.y = velocityY;
+
+    addBodyToWorld(world, ball);
 }
 
 void handleEvents(Game *game) {
@@ -84,22 +98,22 @@ void handleEvents(Game *game) {
 
                 // Left
                 case SDLK_s:
-                    shoot(game, -1, 0);
+                    shoot(game->world, -1, 0);
                     break;
 
                 // Right
                 case SDLK_f:
-                    shoot(game, 1, 0);
+                    shoot(game->world, 1, 0);
                     break;
 
                 // Top
                 case SDLK_e:
-                    shoot(game, 0, -1);
+                    shoot(game->world, 0, -1);
                     break;
 
                 // Bottom
                 case SDLK_d:
-                    shoot(game, 0, 1);
+                    shoot(game->world, 0, 1);
             }
 
         }
@@ -108,22 +122,22 @@ void handleEvents(Game *game) {
     SDL_PumpEvents();
 
     if(game->keyboardState[SDL_SCANCODE_UP])
-        moveUp(game->player);
+        moveUp(game->world->player);
 
     else if(game->keyboardState[SDL_SCANCODE_DOWN])
-        moveDown(game->player);
+        moveDown(game->world->player);
 
     else
-        game->player->normalVelocity.y = 0;
+        game->world->player->direction.y = 0;
 
     if(game->keyboardState[SDL_SCANCODE_LEFT])
-        moveLeft(game->player);
+        moveLeft(game->world->player);
 
     else if(game->keyboardState[SDL_SCANCODE_RIGHT])
-        moveRight(game->player);
+        moveRight(game->world->player);
 
     else
-        game->player->normalVelocity.x = 0;
+        game->world->player->direction.x = 0;
 
     //registerShootInput(game);
 }

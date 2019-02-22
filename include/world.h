@@ -13,6 +13,7 @@ typedef struct Element Element;
 
 struct World {
     Element *first;
+    Body *player;
 };
 typedef struct World World;
 

@@ -10,18 +10,18 @@ enum Layer {
 };
 typedef enum Layer Layer;
 
-struct Velocity {
+struct Vector {
     float x;
     float y;
 };
-typedef struct Velocity Velocity;
+typedef struct Vector Vector;
 
 struct Body {
     float velocity;
     Uint32 color;
     SDL_Surface *surface;
     SDL_Rect transform;
-    Velocity normalVelocity;
+    Vector direction;
     Layer layer;
 };
 typedef struct Body Body;
@@ -39,5 +39,6 @@ void moveLeft(Body *body);
 void moveRight(Body *body);
 void destroyBody(Body *body);
 bool isOffScreen(Body *body);
+void follow(Body *follower, Body *followed);
 
 #endif

@@ -16,8 +16,8 @@ Body *createBody(int x, int y, int w, int h, float velocity, Uint32 color, Layer
     body->transform.w = w;
     body->transform.h = h;
 
-    body->normalVelocity.x = 0;
-    body->normalVelocity.y = 0;
+    body->direction.x = 0;
+    body->direction.y = 0;
 
     body->velocity = velocity * DELTA_TIME / VELOCITY_NORMALIZE;
     body->color = color;
@@ -28,19 +28,19 @@ Body *createBody(int x, int y, int w, int h, float velocity, Uint32 color, Layer
 }
 
 void moveUp(Body *body) {
-    body->normalVelocity.y = -1;
+    body->direction.y = -1;
 }
 
 void moveDown(Body *body) {
-    body->normalVelocity.y = 1;
+    body->direction.y = 1;
 }
 
 void moveRight(Body *body) {
-    body->normalVelocity.x = 1;
+    body->direction.x = 1;
 }
 
 void moveLeft(Body *body) {
-    body->normalVelocity.x = -1;
+    body->direction.x = -1;
 }
 
 void updateBodyPhysics(Body *body) {
@@ -52,13 +52,19 @@ void drawBody(SDL_Surface *screen, Body *body) {
     SDL_BlitSurface(body->surface, NULL, screen, &body->transform);
 }
 
-
-
 void calculatePosition(Body *body) {
+    normalizeVector(&body->direction);
 
-    printf("%ld - %ld\n", lroundf(body->normalVelocity.x * body->velocity), lroundf(body->normalVelocity.y * body->velocity));
-    body->transform.x = (int) roundf(body->transform.x + body->normalVelocity.x * body->velocity);
-    body->transform.y = (int) roundf(body->transform.y + body->normalVelocity.y * body->velocity);
+    if (body->layer == Player)
+        printf("%f - %f\n", body->direction.x, body->direction.y);
+
+    body->transform.x = (int) roundf(body->transform.x + body->direction.x * body->velocity);
+    body->transform.y = (int) roundf(body->transform.y + body->direction.y * body->velocity);
+}
+
+void follow(Body *follower, Body *followed) {
+    follower->direction.x = followed->transform.x - follower->transform.x;
+    follower->direction.y = followed->transform.y - follower->transform.y;
 }
 
 void limitPosition(Body *body) {
