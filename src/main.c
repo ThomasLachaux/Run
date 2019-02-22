@@ -22,13 +22,16 @@ int main(int argc, char *argv[]) {
 
     addBodyToWorld(game.world, game.player);
 
-    Body *enemy;
+    /*Body *enemy;
     for(i = 0; i < SCREEN_WIDTH; i+= 20) {
 
         enemy = createBody(i, 20, 10, 10, 1, 0xCC0000, Enemy);
         enemy->normalVelocity.y = 1;
         addBodyToWorld(game.world, enemy);
-    }
+    }*/
+
+    Body *enemy = createBody(SCREEN_WIDTH / 2, 20, 10, 10, 1, 0xCC0000, Enemy);
+    addBodyToWorld(game.world, enemy);
 
 
 
@@ -54,53 +57,17 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-void registerShootInput(Game *game) {
-
-    static int previous;
-    int current = 0;
-
-    if(game->keyboardState[SDL_SCANCODE_SPACE])
-        current = 1;
-
-    if(current == 1 && previous == 0) {
-        Body *ball = createBody(game->player->transform.x + 5, game->player->transform.y + 5, 5, 5, 5, ballColor, Ball);
-        ball->normalVelocity.y = -1;
-        addBodyToWorld(game->world, ball);
-    }
-
-    previous = current;
-}
-
-void onKeyPress(Game *game, int scancode, int *previous) {
-
-    int current = 0;
-
-    if(game->keyboardState[scancode])
-        current = 1;
-
-    if(current == 1 && previous == 0) {
-        Body *ball = createBody(game->player->transform.x + 5, game->player->transform.y + 5, 5, 5, 5, ballColor, Ball);
-        ball->normalVelocity.y = -1;
-        addBodyToWorld(game->world, ball);
-    }
-
-    *previous = current;
-}
-
 enum Direction {
     Left, Right, Top, Bottom
 };
 typedef enum Direction Direction;
 
-void shoot(Game *game, Direction direction) {
+void shoot(Game *game, float velocityX, float velocityY) {
 
     Body *ball = createBody(game->player->transform.x, game->player->transform.y, 5, 5, 5, ballColor, Ball);
 
-    // Passe la vitesse normale à -1 si gauche, 1 si droite, 0 si autre
-    ball->normalVelocity.x = direction == Left ? -1 : direction == Right ? 1 : 0;
-
-    // Passe la vitesse normale à -1 si haut, 1 si bas, 0 si autre
-    ball->normalVelocity.y = direction == Top ? -1 : direction == Bottom ? 1 : 0;
+    ball->normalVelocity.x = velocityX;
+    ball->normalVelocity.y = velocityY;
 
     addBodyToWorld(game->world, ball);
 }
@@ -115,20 +82,24 @@ void handleEvents(Game *game) {
 
             switch (game->event.key.keysym.sym) {
 
+                // Left
                 case SDLK_s:
-                    shoot(game, Left);
+                    shoot(game, -1, 0);
                     break;
 
+                // Right
                 case SDLK_f:
-                    shoot(game, Right);
+                    shoot(game, 1, 0);
                     break;
 
+                // Top
                 case SDLK_e:
-                    shoot(game, Top);
+                    shoot(game, 0, -1);
                     break;
 
+                // Bottom
                 case SDLK_d:
-                    shoot(game, Bottom);
+                    shoot(game, 0, 1);
             }
 
         }

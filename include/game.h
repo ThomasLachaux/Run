@@ -8,8 +8,8 @@
 
 static const int DELTA_TIME = 1000 / FPS;
 
-static const int SCREEN_WIDTH = 1080;
-static const int SCREEN_HEIGHT = 720;
+static const int SCREEN_WIDTH = 720;
+static const int SCREEN_HEIGHT = 480;
 
 static const int VELOCITY_NORMALIZE = 12;
 

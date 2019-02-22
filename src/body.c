@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include <math.h>
 
 #include "game.h"
@@ -51,9 +52,13 @@ void drawBody(SDL_Surface *screen, Body *body) {
     SDL_BlitSurface(body->surface, NULL, screen, &body->transform);
 }
 
+
+
 void calculatePosition(Body *body) {
-    body->transform.x += lroundf(body->normalVelocity.x * body->velocity);
-    body->transform.y += lroundf(body->normalVelocity.y * body->velocity);
+
+    printf("%ld - %ld\n", lroundf(body->normalVelocity.x * body->velocity), lroundf(body->normalVelocity.y * body->velocity));
+    body->transform.x = (int) roundf(body->transform.x + body->normalVelocity.x * body->velocity);
+    body->transform.y = (int) roundf(body->transform.y + body->normalVelocity.y * body->velocity);
 }
 
 void limitPosition(Body *body) {

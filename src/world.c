@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <game.h>
+#include <math.h>
 
 #include "world.h"
 
@@ -71,6 +72,21 @@ void updateWorldPhysics(World *world) {
 
     registerCollision(world, Enemy, Ball, onEnemyBallCollision);
     registerCollision(world, Player, Enemy, onPlayerEnemyCollision);
+
+    Body *player = world->first->body;
+    Body *enemy = world->first->next->body;
+
+    int diffX = player->transform.x - enemy->transform.x;
+    int diffY = player->transform.y - enemy->transform.y;
+    float distance = sqrtf(powf(diffX, 2) + powf(diffY, 2));
+
+    enemy->normalVelocity.x = diffX / distance;
+    enemy->normalVelocity.y = diffY / distance;
+
+    //updateBodyPhysics(enemy);
+    //printf("%f - %f\n", diffX / distance, diffY / distance);
+
+
 }
 
 void drawWorld(SDL_Surface *screen, World *world) {

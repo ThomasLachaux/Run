@@ -10,12 +10,18 @@ enum Layer {
 };
 typedef enum Layer Layer;
 
+struct Velocity {
+    float x;
+    float y;
+};
+typedef struct Velocity Velocity;
+
 struct Body {
     float velocity;
     Uint32 color;
     SDL_Surface *surface;
     SDL_Rect transform;
-    SDL_Rect normalVelocity;
+    Velocity normalVelocity;
     Layer layer;
 };
 typedef struct Body Body;
