@@ -124,7 +124,6 @@ void handleEvents(Game *game) {
                     break;
 
                 case SDLK_e:
-                    printf("SHHOOOOTT \n");
                     shoot(game, Top);
                     break;
 

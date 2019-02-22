@@ -129,25 +129,29 @@ void destroyBodyFromWorld(World *world, Body *body) {
     free(to_delete);
 }
 
-void registerCollision(World *world, Layer layerA, Layer layerB, bool (*callback)(World *, Body *, Body *)) {
+void registerCollision(World *world, Layer layerA, Layer layerB, void (*callback)(World *, Body *, Body *)) {
 
-    Element *elementA, *elementB;
+    Element *elementA, *elementB, *nextElementA, *nextElementB;
     Body *bodyA, *bodyB;
 
     elementA = world->first;
 
+    
+    
     // Premier parcours
     while (elementA != NULL) {
-
+        
+        nextElementA = elementA->next;
+        
         // Recherche dans le layerA
         if (elementA->body->layer == layerA) {
 
             elementB = world->first;
-
-            Element *test = NULL;
-
+            
             while (elementB != NULL) {
 
+                nextElementB = elementB->next;
+                
                 // Recherche dans le layerB
                 if (elementB->body->layer == layerB) {
 
@@ -165,9 +169,9 @@ void registerCollision(World *world, Layer layerA, Layer layerB, bool (*callback
                     }
                 }
 
-                elementB = elementB->next;
+                elementB = nextElementB;
             }
         }
-        elementA = elementA->next;
+        elementA = nextElementA;
     }
 }

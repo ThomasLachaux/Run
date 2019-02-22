@@ -50,7 +50,7 @@ CMakeFiles/SpaceShooter.dir/src/body.c.obj
  ../include/body.h
  ../include/game.h
  ../include/world.h
- C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/body.c
+ D:/Projets/SpaceShooter/src/body.c
 CMakeFiles/SpaceShooter.dir/src/game.c.obj
  ../include/SDL2/SDL.h
  ../include/SDL2/SDL_assert.h
@@ -100,7 +100,7 @@ CMakeFiles/SpaceShooter.dir/src/game.c.obj
  ../include/body.h
  ../include/game.h
  ../include/world.h
- C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/game.c
+ D:/Projets/SpaceShooter/src/game.c
 CMakeFiles/SpaceShooter.dir/src/main.c.obj
  ../include/SDL2/SDL.h
  ../include/SDL2/SDL_assert.h
@@ -150,7 +150,7 @@ CMakeFiles/SpaceShooter.dir/src/main.c.obj
  ../include/body.h
  ../include/game.h
  ../include/world.h
- C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/main.c
+ D:/Projets/SpaceShooter/src/main.c
 CMakeFiles/SpaceShooter.dir/src/world.c.obj
  ../include/SDL2/SDL.h
  ../include/SDL2/SDL_assert.h
@@ -200,4 +200,4 @@ CMakeFiles/SpaceShooter.dir/src/world.c.obj
  ../include/body.h
  ../include/game.h
  ../include/world.h
- C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/world.c
+ D:/Projets/SpaceShooter/src/world.c
