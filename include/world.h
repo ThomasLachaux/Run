@@ -23,6 +23,8 @@ void updateWorldPhysics(World *world);
 void drawWorld(SDL_Surface *screen, World *world);
 void destroyWorld(World *world);
 void registerCollision(World *world, Layer layerA, Layer layerB, void (*callback)(World *, Body *, Body *));
+Uint32 createEnemy(Uint32 interval, void *world);
+void shoot(World *world, float velocityX, float velocityY);
 void destroyBodyFromWorld(World *world, Body *body);
 
 #endif

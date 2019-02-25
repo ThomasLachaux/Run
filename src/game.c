@@ -31,10 +31,6 @@ int clamp(int lower, int x, int upper) {
     return minInt(upper, maxInt(x, lower));
 }
 
-int center(int a, int b) {
-    return a / 2 - b / 2;
-}
-
 void normalizeVector(Vector *vector) {
     double magnitude = sqrt(pow(vector->x, 2) + pow(vector->y, 2));
 
@@ -42,4 +38,8 @@ void normalizeVector(Vector *vector) {
         vector->x /= magnitude;
         vector->y /= magnitude;
     }
+}
+
+int ranInt(int min, int max) {
+    return rand() % (max + 1 - min) + min;
 }

@@ -141,6 +141,30 @@ void destroyBodyFromWorld(World *world, Body *body) {
     free(to_delete);
 }
 
+Uint32 createEnemy(Uint32 interval, void *world) {
+
+    int x = ranInt(0, 1) ? 0: SCREEN_WIDTH;
+    int y = ranInt(0, SCREEN_HEIGHT);
+
+    Body *enemy = createBody(x, y, MEDIUM, MEDIUM, 1, 0xCC0000, Enemy);
+    addBodyToWorld(world, enemy);
+
+    return interval;
+}
+
+void shoot(World *world, float velocityX, float velocityY) {
+
+    int x = world->player->transform.x + BIG / 2 - SMALL / 2;
+    int y = world->player->transform.y + BIG / 2 - SMALL / 2;
+
+    Body *ball = createBody(x, y, SMALL, SMALL, 5, WHITE, Ball);
+
+    ball->direction.x = velocityX;
+    ball->direction.y = velocityY;
+
+    addBodyToWorld(world, ball);
+}
+
 void registerCollision(World *world, Layer layerA, Layer layerB, void (*callback)(World *, Body *, Body *)) {
 
     Element *elementA, *elementB, *nextElementA, *nextElementB;

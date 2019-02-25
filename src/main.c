@@ -10,25 +10,21 @@
 int i;
 
 void handleEvents(Game *game);
-
 void drawBackground(SDL_Surface *screen);
 
 // todo: reorganiser code
-int ranInt(int min, int max) {
-    return rand() % (max + 1 - min) + min;
+
+int setRenderColor(SDL_Renderer *renderer, Uint32 color) {
+
+    Uint8 r, g, b, a;
+
+    r = color / (256 * 256);
+    g = color / 256 % 256;
+    b = color % 256;
+    a = 0xFF;
+
+    return SDL_SetRenderDrawColor(renderer, r, g, b, a);
 }
-
-Uint32 createEnemy(Uint32 interval, void *world) {
-
-    int x = ranInt(0, 1) ? 0: SCREEN_WIDTH;
-    int y = ranInt(0, SCREEN_HEIGHT);
-
-    Body *enemy = createBody(x, y, 10, 10, 1, 0xCC0000, Enemy);
-    addBodyToWorld(world, enemy);
-
-    return interval;
-}
-
 
 int main(int argc, char *argv[]) {
 
@@ -38,7 +34,7 @@ int main(int argc, char *argv[]) {
 
 
     game.world = createWorld();
-    game.world->player = createBody(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 3 / 4, playerSize, playerSize, 4, playerColor, Player);
+    game.world->player = createBody(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 3 / 4, BIG, BIG, 4, BLACK, Player);
 
     addBodyToWorld(game.world, game.world->player);
 
@@ -50,9 +46,6 @@ int main(int argc, char *argv[]) {
     while(!game.quit) {
         handleEvents(&game);
         updateWorldPhysics(game.world);
-
-
-        Element *current = game.world->first;
 
         drawBackground(game.screen);
         drawWorld(game.screen, game.world);
@@ -66,24 +59,6 @@ int main(int argc, char *argv[]) {
 
     SDL_Quit();
     return 0;
-}
-
-enum Direction {
-    Left, Right, Top, Bottom
-};
-typedef enum Direction Direction;
-
-void shoot(World *world, float velocityX, float velocityY) {
-
-    int x = world->player->transform.x - ballSize / 2;
-    int y = world->player->transform.y - ballSize / 2;
-
-    Body *ball = createBody(x, y, ballSize, ballSize, 5, ballColor, Ball);
-
-    ball->direction.x = velocityX;
-    ball->direction.y = velocityY;
-
-    addBodyToWorld(world, ball);
 }
 
 void handleEvents(Game *game) {
@@ -138,10 +113,8 @@ void handleEvents(Game *game) {
 
     else
         game->world->player->direction.x = 0;
-
-    //registerShootInput(game);
 }
 
 void drawBackground(SDL_Surface *screen) {
-    SDL_FillRect(screen, NULL, backgroundColor);
+    SDL_FillRect(screen, NULL, GREEN);
 }

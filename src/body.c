@@ -19,7 +19,7 @@ Body *createBody(int x, int y, int w, int h, float velocity, Uint32 color, Layer
     body->direction.x = 0;
     body->direction.y = 0;
 
-    body->velocity = velocity * DELTA_TIME / VELOCITY_NORMALIZE;
+    body->velocity = velocity * DELTA_TIME / VELOCITY_COEFF;
     body->color = color;
 
     body->layer = layer;

@@ -5,26 +5,20 @@
 #include "world.h"
 
 #define FPS 60
+#define DELTA_TIME 1000 / FPS
 
-static const int DELTA_TIME = 1000 / FPS;
+#define SCREEN_WIDTH 720
+#define SCREEN_HEIGHT 480
 
-static const int SCREEN_WIDTH = 720;
-static const int SCREEN_HEIGHT = 480;
+#define VELOCITY_COEFF 12
 
-static const int VELOCITY_NORMALIZE = 12;
+#define BIG 20
+#define MEDIUM 10
+#define SMALL 5
 
-// todo: Passer en define
-
-static const int playerSize = 20;
-static const int ballSize = 5;
-
-static const Uint32 backgroundColor = 0x11CE70;
-static const Uint32 playerColor = 0x000000;
-static const Uint32 ballColor = 0xFFFFFF;
-
-//SDL_Window *window;
-//SDL_Surface *screen;
-//SDL_Event e;
+#define GREEN 0x11CE70
+#define BLACK 0x000000
+#define WHITE 0xFFFFFF
 
 struct Game {
     SDL_Window *window;
@@ -40,6 +34,7 @@ Game initGame();
 int minInt(int x, int y);
 int maxInt(int x, int y);
 int clamp(int lower, int x, int upper);
-int center(int a, int b);
 void normalizeVector(Vector *vector);
+int ranInt(int min, int max);
+
 #endif
