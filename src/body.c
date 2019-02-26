@@ -47,9 +47,9 @@ void updateBodyPhysics(Body *body) {
     calculatePosition(body);
 }
 
-void drawBody(SDL_Surface *screen, Body *body) {
-    SDL_FillRect(body->surface, NULL, body->color);
-    SDL_BlitSurface(body->surface, NULL, screen, &body->transform);
+void drawBody(SDL_Renderer *renderer, Body *body) {
+    setRenderColor(renderer, body->color);
+    SDL_RenderFillRect(renderer, &body->transform);
 }
 
 void calculatePosition(Body *body) {

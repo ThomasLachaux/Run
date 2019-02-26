@@ -10,21 +10,11 @@
 int i;
 
 void handleEvents(Game *game);
-void drawBackground(SDL_Surface *screen);
+void drawBackground(SDL_Renderer *renderer);
 
 // todo: reorganiser code
 
-int setRenderColor(SDL_Renderer *renderer, Uint32 color) {
 
-    Uint8 r, g, b, a;
-
-    r = color / (256 * 256);
-    g = color / 256 % 256;
-    b = color % 256;
-    a = 0xFF;
-
-    return SDL_SetRenderDrawColor(renderer, r, g, b, a);
-}
 
 int main(int argc, char *argv[]) {
 
@@ -47,10 +37,10 @@ int main(int argc, char *argv[]) {
         handleEvents(&game);
         updateWorldPhysics(game.world);
 
-        drawBackground(game.screen);
-        drawWorld(game.screen, game.world);
+        drawBackground(game.renderer);
+        drawWorld(game.renderer, game.world);
 
-        SDL_UpdateWindowSurface(game.window);
+        SDL_RenderPresent(game.renderer);
         SDL_Delay(DELTA_TIME);
     }
 
@@ -115,6 +105,7 @@ void handleEvents(Game *game) {
         game->world->player->direction.x = 0;
 }
 
-void drawBackground(SDL_Surface *screen) {
-    SDL_FillRect(screen, NULL, GREEN);
+void drawBackground(SDL_Renderer *renderer) {
+    setRenderColor(renderer, GREEN);
+    SDL_RenderClear(renderer);
 }

@@ -22,6 +22,8 @@
 
 struct Game {
     SDL_Window *window;
+    SDL_Renderer *renderer;
+    // todo: à supprimer
     SDL_Surface *screen;
     SDL_Event event;
     World *world;
@@ -36,5 +38,5 @@ int maxInt(int x, int y);
 int clamp(int lower, int x, int upper);
 void normalizeVector(Vector *vector);
 int ranInt(int min, int max);
-
+int setRenderColor(SDL_Renderer *renderer, Uint32 color);
 #endif

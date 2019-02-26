@@ -10,7 +10,10 @@ Game initGame() {
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER);
 
     game.window = SDL_CreateWindow("Space Shooter", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+    // todo: à supprimer
     game.screen = SDL_GetWindowSurface(game.window);
+
+    game.renderer = SDL_CreateRenderer(game.window, -1, SDL_RENDERER_ACCELERATED);
 
     game.keyboardState = SDL_GetKeyboardState(NULL);
 
@@ -42,4 +45,16 @@ void normalizeVector(Vector *vector) {
 
 int ranInt(int min, int max) {
     return rand() % (max + 1 - min) + min;
+}
+
+int setRenderColor(SDL_Renderer *renderer, Uint32 color) {
+
+    Uint8 r, g, b, a;
+
+    r = color / (256 * 256);
+    g = color / 256 % 256;
+    b = color % 256;
+    a = 0xFF;
+
+    return SDL_SetRenderDrawColor(renderer, r, g, b, a);
 }

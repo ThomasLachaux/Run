@@ -85,7 +85,7 @@ void updateWorldPhysics(World *world) {
 
 }
 
-void drawWorld(SDL_Surface *screen, World *world) {
+void drawWorld(SDL_Renderer *screen, World *world) {
     Element *current = world->first;
 
     while (current != NULL) {
