@@ -20,6 +20,11 @@
 #define BLACK 0x000000
 #define WHITE 0xFFFFFF
 
+#define LEFT SDLK_s
+#define RIGHT SDLK_f
+#define TOP SDLK_e
+#define BOTTOM SDLK_d
+
 struct Game {
     SDL_Window *window;
     SDL_Renderer *renderer;

@@ -62,22 +62,22 @@ void handleEvents(Game *game) {
             switch (game->event.key.keysym.sym) {
 
                 // Left
-                case SDLK_s:
+                case LEFT:
                     shoot(game->world, -1, 0);
                     break;
 
                 // Right
-                case SDLK_f:
+                case RIGHT:
                     shoot(game->world, 1, 0);
                     break;
 
                 // Top
-                case SDLK_e:
+                case TOP:
                     shoot(game->world, 0, -1);
                     break;
 
                 // Bottom
-                case SDLK_d:
+                case BOTTOM:
                     shoot(game->world, 0, 1);
             }
 
