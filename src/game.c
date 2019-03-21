@@ -1,5 +1,6 @@
 #include <math.h>
 #include <stdio.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "game.h"
 
@@ -8,6 +9,7 @@ Game initGame() {
     Game game;
 
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER);
+    TTF_Init();
 
     game.window = SDL_CreateWindow("Space Shooter", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     // todo: à supprimer

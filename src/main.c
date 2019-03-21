@@ -22,7 +22,6 @@ int main(int argc, char *argv[]) {
 
     Game game = initGame();
 
-
     game.world = createWorld();
     game.world->player = createBody(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 3 / 4, BIG, BIG, 4, BLACK, Player);
 
@@ -62,7 +61,8 @@ void handleEvents(Game *game) {
             switch (game->event.key.keysym.sym) {
 
                 // Left
-                case LEFT:
+                case LEFT_AZERTY:
+                case LEFT_QWERTY:
                     shoot(game->world, -1, 0);
                     break;
 
@@ -72,7 +72,8 @@ void handleEvents(Game *game) {
                     break;
 
                 // Top
-                case TOP:
+                case TOP_AZERTY:
+                case TOP_QWERTY:
                     shoot(game->world, 0, -1);
                     break;
 
