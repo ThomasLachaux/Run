@@ -55,9 +55,6 @@ void drawBody(SDL_Renderer *renderer, Body *body) {
 void calculatePosition(Body *body) {
     normalizeVector(&body->direction);
 
-    if (body->layer == Player)
-        printf("%f - %f\n", body->direction.x, body->direction.y);
-
     body->transform.x = (int) roundf(body->transform.x + body->direction.x * body->velocity);
     body->transform.y = (int) roundf(body->transform.y + body->direction.y * body->velocity);
 }

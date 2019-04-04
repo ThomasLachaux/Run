@@ -56,7 +56,6 @@ void onPlayerEnemyCollision(World *world, Body *player, Body *enemy) {
 }
 
 
-
 void updateWorldPhysics(World *world) {
     Element *current = world->first;
 
@@ -117,28 +116,31 @@ void destroyBodyFromWorld(World *world, Body *body) {
         to_delete = to_delete->next;
     }
 
-    previous = to_delete->previous;
-    next = to_delete->next;
+    if(to_delete != NULL) {
+        
+        previous = to_delete->previous;
+        next = to_delete->next;
 
-    // If first element
-    if (previous == NULL) {
+        // If first element
+        if (previous == NULL) {
 
-        world->first = next;
+            world->first = next;
 
-        if (next != NULL)
-            next->previous = NULL;
+            if (next != NULL)
+                next->previous = NULL;
+        }
+
+            // If not first element
+        else {
+            previous->next = next;
+
+            if (next != NULL)
+                next->previous = previous;
+        }
+
+        destroyBody(to_delete->body);
+        free(to_delete);
     }
-
-        // If not first element
-    else {
-        previous->next = next;
-
-        if (next != NULL)
-            next->previous = previous;
-    }
-
-    destroyBody(to_delete->body);
-    free(to_delete);
 }
 
 Uint32 createEnemy(Uint32 interval, void *world) {

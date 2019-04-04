@@ -1,6 +1,6 @@
 #include <math.h>
 #include <stdio.h>
-#include <SDL2/SDL_ttf.h>
+
 
 #include "game.h"
 
@@ -9,7 +9,10 @@ Game initGame() {
     Game game;
 
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER);
+
     TTF_Init();
+
+    game.font = TTF_OpenFont("../src/LemonMilk.ttf", 20);
 
     game.window = SDL_CreateWindow("Space Shooter", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     // todo: à supprimer
@@ -21,7 +24,19 @@ Game initGame() {
 
     game.quit = false;
 
+    game.score = 0;
+
     return game;
+}
+
+void destroyGame(Game *game) {
+    destroyWorld(game->world);
+    SDL_DestroyWindow(game->window);
+
+    TTF_CloseFont(game->font);
+
+    TTF_Quit();
+    SDL_Quit();
 }
 
 int minInt(int x, int y) {
@@ -59,4 +74,26 @@ int setRenderColor(SDL_Renderer *renderer, Uint32 color) {
     a = 0xFF;
 
     return SDL_SetRenderDrawColor(renderer, r, g, b, a);
+}
+
+void increaseAndDrawScore(Game *game) {
+    char displayScore[6];
+
+    sprintf(displayScore, "%06d", game->score);
+
+    SDL_Color black = {255, 255, 255};
+    // Ligne en dessous pose probleme
+    SDL_Surface *text = TTF_RenderText_Blended(game->font, displayScore, black);
+
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(game->renderer, text);
+
+    SDL_Rect pos;
+    pos.x = 10;
+    pos.y = 10;
+    pos.w = text->w;
+    pos.h = text->h;
+
+    SDL_RenderCopy(game->renderer, texture, NULL, &pos);
+
+    game->score += DELTA_TIME / 10;
 }

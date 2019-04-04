@@ -27,10 +27,10 @@ int main(int argc, char *argv[]) {
 
     addBodyToWorld(game.world, game.world->player);
 
-    for(i = 0; i < 6; i++)
+    for(i = 0; i < INITIAL_ENEMIES; i++)
         createEnemy(0, game.world);
 
-    SDL_AddTimer(2000, createEnemy, game.world);
+    SDL_AddTimer(SPAWN_TIME, createEnemy, game.world);
 
     while(!game.quit) {
         handleEvents(&game);
@@ -39,14 +39,13 @@ int main(int argc, char *argv[]) {
         drawBackground(game.renderer);
         drawWorld(game.renderer, game.world);
 
+        increaseAndDrawScore(&game);
+
         SDL_RenderPresent(game.renderer);
         SDL_Delay(DELTA_TIME);
     }
 
-    destroyWorld(game.world);
-    SDL_DestroyWindow(game.window);
-
-    SDL_Quit();
+    destroyGame(&game);
     return 0;
 }
 
