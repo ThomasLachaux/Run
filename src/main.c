@@ -40,6 +40,8 @@ int main(int argc, char *argv[]) {
         drawWorld(game.renderer, game.world);
 
         increaseAndDrawScore(&game);
+        displayWaveTime(&game);
+
 
         SDL_RenderPresent(game.renderer);
         SDL_Delay(DELTA_TIME);

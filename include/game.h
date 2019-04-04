@@ -59,4 +59,5 @@ void normalizeVector(Vector *vector);
 int ranInt(int min, int max);
 int setRenderColor(SDL_Renderer *renderer, Uint32 color);
 void increaseAndDrawScore(Game *game);
+void displayWaveTime(Game *game);
 #endif

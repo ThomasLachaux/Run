@@ -81,9 +81,32 @@ void increaseAndDrawScore(Game *game) {
 
     sprintf(displayScore, "%06d", game->score);
 
-    SDL_Color black = {255, 255, 255};
+    SDL_Color color = {255, 255, 255};
     // Ligne en dessous pose probleme
-    SDL_Surface *text = TTF_RenderText_Blended(game->font, displayScore, black);
+    SDL_Surface *text = TTF_RenderText_Blended(game->font, displayScore, color);
+
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(game->renderer, text);
+
+    SDL_Rect pos;
+    pos.x = SCREEN_WIDTH - 100;
+    pos.y = 10;
+    pos.w = text->w;
+    pos.h = text->h;
+
+    SDL_RenderCopy(game->renderer, texture, NULL, &pos);
+
+    game->score += DELTA_TIME / 10;
+}
+
+void displayWaveTime(Game *game) {
+    int time = WAVE_TIME - SDL_GetTicks() % WAVE_TIME;
+    time /= 1000;
+    time += 1;
+    char timeDisplay[16];
+    sprintf(timeDisplay, "Vague: %02d s", time);
+
+    SDL_Color color = {255, 255, 255};
+    SDL_Surface *text = TTF_RenderText_Blended(game->font, timeDisplay, color);
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(game->renderer, text);
 
@@ -94,6 +117,4 @@ void increaseAndDrawScore(Game *game) {
     pos.h = text->h;
 
     SDL_RenderCopy(game->renderer, texture, NULL, &pos);
-
-    game->score += DELTA_TIME / 10;
 }
