@@ -14,8 +14,10 @@
 
 // Game design
 #define VELOCITY_COEFF 12
-#define INITIAL_ENEMIES 6
 #define SPAWN_TIME 2000
+#define SPAWN_MIN 500
+#define WAVE_LENGTH 10
+#define WAVE_TIME 30000
 
 // Styles
 #define BIG 20

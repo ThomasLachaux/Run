@@ -27,10 +27,10 @@ int main(int argc, char *argv[]) {
 
     addBodyToWorld(game.world, game.world->player);
 
-    for(i = 0; i < INITIAL_ENEMIES; i++)
-        createEnemy(0, game.world);
+    spawnWave(0, game.world);
 
     SDL_AddTimer(SPAWN_TIME, createEnemy, game.world);
+    SDL_AddTimer(WAVE_TIME, spawnWave, game.world);
 
     while(!game.quit) {
         handleEvents(&game);

@@ -117,7 +117,7 @@ void destroyBodyFromWorld(World *world, Body *body) {
     }
 
     if(to_delete != NULL) {
-        
+
         previous = to_delete->previous;
         next = to_delete->next;
 
@@ -148,8 +148,18 @@ Uint32 createEnemy(Uint32 interval, void *world) {
     int x = ranInt(0, 1) ? 0: SCREEN_WIDTH;
     int y = ranInt(0, SCREEN_HEIGHT);
 
-    Body *enemy = createBody(x, y, MEDIUM, MEDIUM, 1, 0xCC0000, Enemy);
+    Body *enemy = createBody(x, y, MEDIUM, MEDIUM, 3, 0xCC0000, Enemy);
     addBodyToWorld(world, enemy);
+
+    printf("Ennemi arrive dans %dms\n", interval);
+    return (Uint32) maxInt(SPAWN_MIN, interval - DELTA_TIME);
+}
+
+Uint32 spawnWave(Uint32 interval, void *world) {
+    int i;
+
+    for(i = 0; i < WAVE_LENGTH; i++)
+        createEnemy(0, world);
 
     return interval;
 }
