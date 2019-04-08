@@ -15,7 +15,32 @@ void drawBackground(SDL_Renderer *renderer);
 
 // todo: reorganiser code
 
+void createGame(Game *game) {
+    game->world = createWorld();
+    game->world->player = createBody(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 3 / 4, BIG, BIG, 4, BLACK, Player);
 
+    addBodyToWorld(game->world, game->world->player);
+
+    spawnWave(0, game->world);
+
+    SDL_AddTimer(SPAWN_TIME, createEnemy, game->world);
+    SDL_AddTimer(WAVE_TIME, spawnWave, game->world);
+    SDL_AddTimer(5000, createItem, game->world);
+}
+
+void drawMenu(Game *game) {
+    
+}
+
+void drawGame(Game *game) {
+    handleEvents(game);
+    updateWorldPhysics(game->world);
+
+    drawWorld(game->renderer, game->world);
+
+    increaseAndDrawScore(game);
+    displayWaveTime(game);
+}
 
 int main(int argc, char *argv[]) {
 
@@ -23,27 +48,15 @@ int main(int argc, char *argv[]) {
 
     Game game = initGame();
 
-    game.world = createWorld();
-    game.world->player = createBody(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 3 / 4, BIG, BIG, 4, BLACK, Player);
-
-    addBodyToWorld(game.world, game.world->player);
-
-    spawnWave(0, game.world);
-
-    SDL_AddTimer(SPAWN_TIME, createEnemy, game.world);
-    SDL_AddTimer(WAVE_TIME, spawnWave, game.world);
-    SDL_AddTimer(5000, createItem, game.world);
+    createGame(&game);
 
     while(!game.quit) {
-        handleEvents(&game);
-        updateWorldPhysics(game.world);
 
         drawBackground(game.renderer);
-        drawWorld(game.renderer, game.world);
 
-        increaseAndDrawScore(&game);
-        displayWaveTime(&game);
 
+
+        drawGame(&game);
 
         SDL_RenderPresent(game.renderer);
 
@@ -84,6 +97,7 @@ void handleEvents(Game *game) {
                 // Bottom
                 case BOTTOM:
                     shoot(game->world, 0, 1);
+
             }
 
         }
