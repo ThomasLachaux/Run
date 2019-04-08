@@ -24,6 +24,7 @@ void drawWorld(SDL_Renderer *screen, World *world);
 void destroyWorld(World *world);
 void registerCollision(World *world, Layer layerA, Layer layerB, void (*callback)(World *, Body *, Body *));
 Uint32 createEnemy(Uint32 interval, void *world);
+Uint32 createItem(Uint32 interval, void *world);
 Uint32 spawnWave(Uint32 interval, void *world);
 void shoot(World *world, float velocityX, float velocityY);
 void destroyBodyFromWorld(World *world, Body *body);

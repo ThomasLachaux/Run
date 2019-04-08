@@ -82,7 +82,6 @@ void increaseAndDrawScore(Game *game) {
     sprintf(displayScore, "%06d", game->score);
 
     SDL_Color color = {255, 255, 255};
-    // Ligne en dessous pose probleme
     SDL_Surface *text = TTF_RenderText_Blended(game->font, displayScore, color);
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(game->renderer, text);
@@ -105,7 +104,8 @@ void displayWaveTime(Game *game) {
     char timeDisplay[16];
     sprintf(timeDisplay, "Vague: %02d s", time);
 
-    SDL_Color color = {255, 255, 255};
+    Uint8 displayGreenBlue = (Uint8) (time <= 10 && time % 2 == 0 ? 0 : 255);
+    SDL_Color color = {255, displayGreenBlue, displayGreenBlue};
     SDL_Surface *text = TTF_RenderText_Blended(game->font, timeDisplay, color);
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(game->renderer, text);

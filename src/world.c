@@ -55,6 +55,18 @@ void onPlayerEnemyCollision(World *world, Body *player, Body *enemy) {
     destroyBodyFromWorld(world, player);
 }
 
+void onPlayerItemCollision(World *world, Body *player, Body *item) {
+    float x,y;
+
+    for(x = -1; x <= 1; x += 0.1) {
+        for(y = -1; y <= 1; y += 0.1) {
+            if(x != 0 || y != 0)
+                shoot(world, x, y);
+        }
+    }
+
+    destroyBodyFromWorld(world, item);
+}
 
 void updateWorldPhysics(World *world) {
     Element *current = world->first;
@@ -74,14 +86,9 @@ void updateWorldPhysics(World *world) {
         current = current->next;
     }
 
-    // todo: refaire registerCollision
     registerCollision(world, Enemy, Ball, onEnemyBallCollision);
     registerCollision(world, Player, Enemy, onPlayerEnemyCollision);
-
-    //updateBodyPhysics(enemy);
-    //printf("%f - %f\n", diffX / distance, diffY / distance);
-
-
+    registerCollision(world, Player, Item, onPlayerItemCollision);
 }
 
 void drawWorld(SDL_Renderer *screen, World *world) {
@@ -141,6 +148,16 @@ void destroyBodyFromWorld(World *world, Body *body) {
         destroyBody(to_delete->body);
         free(to_delete);
     }
+}
+
+Uint32 createItem(Uint32 interval, void *world) {
+    int x = ranInt(MEDIUM, SCREEN_WIDTH - MEDIUM);
+    int y = ranInt(MEDIUM, SCREEN_HEIGHT - MEDIUM);
+
+    Body *item = createBody(x, y, MEDIUM, MEDIUM, 0, 0x0000CC, Item);
+    addBodyToWorld(world, item);
+
+    return interval;
 }
 
 Uint32 createEnemy(Uint32 interval, void *world) {
@@ -213,7 +230,8 @@ void registerCollision(World *world, Layer layerA, Layer layerB, void (*callback
                             bodyA->transform.y < bodyB->transform.y + bodyB->transform.h &&
                             bodyA->transform.h + bodyA->transform.y > bodyB->transform.y) {
 
-                        (*callback)(world, bodyA, bodyB);
+                        if(callback != NULL)
+                            (*callback)(world, bodyA, bodyB);
                     }
                 }
 

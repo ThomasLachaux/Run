@@ -31,6 +31,7 @@ int main(int argc, char *argv[]) {
 
     SDL_AddTimer(SPAWN_TIME, createEnemy, game.world);
     SDL_AddTimer(WAVE_TIME, spawnWave, game.world);
+    SDL_AddTimer(5000, createItem, game.world);
 
     while(!game.quit) {
         handleEvents(&game);
