@@ -26,6 +26,8 @@ Game initGame() {
 
     game.score = 0;
 
+    game.mode = Menu;
+
     return game;
 }
 

@@ -36,6 +36,11 @@
 #define TOP_QWERTY SDLK_w
 #define BOTTOM SDLK_s
 
+enum Mode {
+    Menu, Shoot, Pick
+};
+typedef enum Mode Mode;
+
 struct Game {
     SDL_Window *window;
     SDL_Renderer *renderer;
@@ -47,6 +52,7 @@ struct Game {
     const Uint8 *keyboardState;
     bool quit;
     int score;
+    Mode mode;
 };
 typedef struct Game Game;
 

@@ -7,6 +7,7 @@
 #include "body.h"
 #include "world.h"
 
+
 int i;
 
 void handleEvents(Game *game);
@@ -45,6 +46,7 @@ int main(int argc, char *argv[]) {
 
 
         SDL_RenderPresent(game.renderer);
+
         SDL_Delay(DELTA_TIME);
     }
 

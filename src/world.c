@@ -56,12 +56,14 @@ void onPlayerEnemyCollision(World *world, Body *player, Body *enemy) {
 }
 
 void onPlayerItemCollision(World *world, Body *player, Body *item) {
-    float x,y;
+    int x,y;
 
-    for(x = -1; x <= 1; x += 0.1) {
-        for(y = -1; y <= 1; y += 0.1) {
+    int steps = 10;
+
+    for(x = -steps; x <= steps; x++) {
+        for(y = -steps; y <= steps; y ++) {
             if(x != 0 || y != 0)
-                shoot(world, x, y);
+                shoot(world, (float) x / steps, (float) y / steps);
         }
     }
 
@@ -87,7 +89,7 @@ void updateWorldPhysics(World *world) {
     }
 
     registerCollision(world, Enemy, Ball, onEnemyBallCollision);
-    registerCollision(world, Player, Enemy, onPlayerEnemyCollision);
+    //registerCollision(world, Player, Enemy, onPlayerEnemyCollision);
     registerCollision(world, Player, Item, onPlayerItemCollision);
 }
 
@@ -146,7 +148,8 @@ void destroyBodyFromWorld(World *world, Body *body) {
         }
 
         destroyBody(to_delete->body);
-        free(to_delete);
+        // todo: trouver une solution à ça
+        //free(to_delete);
     }
 }
 
@@ -168,7 +171,6 @@ Uint32 createEnemy(Uint32 interval, void *world) {
     Body *enemy = createBody(x, y, MEDIUM, MEDIUM, 3, 0xCC0000, Enemy);
     addBodyToWorld(world, enemy);
 
-    printf("Ennemi arrive dans %dms\n", interval);
     return (Uint32) maxInt(SPAWN_MIN, interval - DELTA_TIME);
 }
 
@@ -230,7 +232,6 @@ void registerCollision(World *world, Layer layerA, Layer layerB, void (*callback
                             bodyA->transform.y < bodyB->transform.y + bodyB->transform.h &&
                             bodyA->transform.h + bodyA->transform.y > bodyB->transform.y) {
 
-                        if(callback != NULL)
                             (*callback)(world, bodyA, bodyB);
                     }
                 }
