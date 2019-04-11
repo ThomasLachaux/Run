@@ -168,7 +168,7 @@ Uint32 createEnemy(Uint32 interval, void *world) {
     int x = ranInt(0, 1) ? 0: SCREEN_WIDTH;
     int y = ranInt(0, SCREEN_HEIGHT);
 
-    Body *enemy = createBody(x, y, MEDIUM, MEDIUM, 3, 0xCC0000, Enemy);
+    Body *enemy = createBody(x, y, MEDIUM, MEDIUM, 3, ENEMY_COLOR, Enemy);
     addBodyToWorld(world, enemy);
 
     return (Uint32) maxInt(SPAWN_MIN, interval - DELTA_TIME);
@@ -188,7 +188,7 @@ void shoot(World *world, float velocityX, float velocityY) {
     int x = world->player->transform.x + BIG / 2 - SMALL / 2;
     int y = world->player->transform.y + BIG / 2 - SMALL / 2;
 
-    Body *ball = createBody(x, y, SMALL, SMALL, 5, WHITE, Ball);
+    Body *ball = createBody(x, y, SMALL, SMALL, 5, BALL_COLOR, Ball);
 
     ball->direction.x = velocityX;
     ball->direction.y = velocityY;

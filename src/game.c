@@ -26,7 +26,7 @@ Game initGame() {
 
     game.score = 0;
 
-    game.mode = Menu;
+    game.isPlaying = false;
 
     return game;
 }

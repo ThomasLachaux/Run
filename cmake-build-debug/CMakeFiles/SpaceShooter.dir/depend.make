@@ -119,6 +119,7 @@ CMakeFiles/SpaceShooter.dir/src/main.c.obj: ../include/SDL2/SDL_gamecontroller.h
 CMakeFiles/SpaceShooter.dir/src/main.c.obj: ../include/SDL2/SDL_gesture.h
 CMakeFiles/SpaceShooter.dir/src/main.c.obj: ../include/SDL2/SDL_haptic.h
 CMakeFiles/SpaceShooter.dir/src/main.c.obj: ../include/SDL2/SDL_hints.h
+CMakeFiles/SpaceShooter.dir/src/main.c.obj: ../include/SDL2/SDL_image.h
 CMakeFiles/SpaceShooter.dir/src/main.c.obj: ../include/SDL2/SDL_joystick.h
 CMakeFiles/SpaceShooter.dir/src/main.c.obj: ../include/SDL2/SDL_keyboard.h
 CMakeFiles/SpaceShooter.dir/src/main.c.obj: ../include/SDL2/SDL_keycode.h

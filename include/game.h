@@ -24,9 +24,12 @@
 #define MEDIUM 13
 #define SMALL 8
 
-#define GREEN 0x11CE70
-#define BLACK 0x000000
-#define WHITE 0xFFFFFF
+//#define GREEN 0x11CE70
+#define BACKGROUND_COLOR 0xFFFFFF
+#define BACKGROUND_SECONDARY_COLOR 0xDDDDDD
+#define PLAYER_COLOR 0x222222
+#define BALL_COLOR 0x222222
+#define ENEMY_COLOR 0xCC0000
 
 // Contrôles
 #define LEFT_AZERTY SDLK_q
@@ -35,11 +38,6 @@
 #define TOP_AZERTY SDLK_z
 #define TOP_QWERTY SDLK_w
 #define BOTTOM SDLK_s
-
-enum Mode {
-    Menu, Shoot, Pick
-};
-typedef enum Mode Mode;
 
 struct Game {
     SDL_Window *window;
@@ -52,7 +50,7 @@ struct Game {
     const Uint8 *keyboardState;
     bool quit;
     int score;
-    Mode mode;
+    bool isPlaying;
 };
 typedef struct Game Game;
 
@@ -66,4 +64,5 @@ int ranInt(int min, int max);
 int setRenderColor(SDL_Renderer *renderer, Uint32 color);
 void increaseAndDrawScore(Game *game);
 void displayWaveTime(Game *game);
+void displayRules(Game *game);
 #endif
