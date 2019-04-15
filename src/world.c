@@ -8,6 +8,7 @@
 World *createWorld() {
     World *world = malloc(sizeof(World));
     world->first = NULL;
+    world->isPlaying = false;
 
     return world;
 }
@@ -70,6 +71,18 @@ void onPlayerItemCollision(World *world, Body *player, Body *item) {
     destroyBodyFromWorld(world, item);
 }
 
+void onPlayerStartCollision(World *world, Body *player, Body *start) {
+    world->isPlaying = true;
+
+    spawnWave(0, world);
+
+    SDL_AddTimer(SPAWN_TIME, createEnemy, world);
+    SDL_AddTimer(WAVE_TIME, spawnWave, world);
+    SDL_AddTimer(5000, createItem, world);
+
+    onPlayerItemCollision(world, player, start);
+}
+
 void updateWorldPhysics(World *world) {
     Element *current = world->first;
 
@@ -91,6 +104,7 @@ void updateWorldPhysics(World *world) {
     registerCollision(world, Enemy, Ball, onEnemyBallCollision);
     //registerCollision(world, Player, Enemy, onPlayerEnemyCollision);
     registerCollision(world, Player, Item, onPlayerItemCollision);
+    registerCollision(world, Player, Start, onPlayerStartCollision);
 }
 
 void drawWorld(SDL_Renderer *screen, World *world) {

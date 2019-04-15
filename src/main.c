@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
     SDL_AddTimer(SPAWN_TIME, createEnemy, game.world);
     SDL_AddTimer(WAVE_TIME, spawnWave, game.world);
     SDL_AddTimer(5000, createItem, game.world);*/
-    Body *playButton = createBody(500, 200, 300, 50, 0, 0x222222, Item);
+    Body *playButton = createBody(SCREEN_WIDTH / 2 - 300 / 2, SCREEN_HEIGHT / 2 - 50 / 2, 300, 50, 0, 0x222222, Start);
     addBodyToWorld(game.world, playButton);
 
     while(!game.quit) {
@@ -56,9 +56,13 @@ int main(int argc, char *argv[]) {
 
         drawWorld(game.renderer, game.world);
 
-        if(game.isPlaying) {
+        if(game.world->isPlaying) {
             increaseAndDrawScore(&game);
             displayWaveTime(&game);
+        }
+
+        else {
+            drawButtonsText(&game);
         }
 
         SDL_RenderPresent(game.renderer);

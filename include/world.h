@@ -14,6 +14,7 @@ typedef struct Element Element;
 struct World {
     Element *first;
     Body *player;
+    bool isPlaying
 };
 typedef struct World World;
 

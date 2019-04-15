@@ -50,7 +50,6 @@ struct Game {
     const Uint8 *keyboardState;
     bool quit;
     int score;
-    bool isPlaying;
 };
 typedef struct Game Game;
 
@@ -65,4 +64,5 @@ int setRenderColor(SDL_Renderer *renderer, Uint32 color);
 void increaseAndDrawScore(Game *game);
 void displayWaveTime(Game *game);
 void displayRules(Game *game);
+void drawButtonsText(Game *game);
 #endif

@@ -6,7 +6,7 @@
 #include "world.h"
 
 enum Layer {
-    Player, Enemy, Ball, Item
+    Player, Enemy, Ball, Item, Start
 };
 typedef enum Layer Layer;
 

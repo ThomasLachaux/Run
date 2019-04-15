@@ -26,8 +26,6 @@ Game initGame() {
 
     game.score = 0;
 
-    game.isPlaying = false;
-
     return game;
 }
 
@@ -106,8 +104,8 @@ void displayWaveTime(Game *game) {
     char timeDisplay[16];
     sprintf(timeDisplay, "Vague: %02d s", time);
 
-    Uint8 displayGreenBlue = (Uint8) (time <= 10 && time % 2 == 0 ? 0 : 255);
-    SDL_Color color = {255, displayGreenBlue, displayGreenBlue};
+    Uint8 displayRed = (Uint8) (time <= 10 && time % 2 == 0 ? 255 : 0);
+    SDL_Color color = {displayRed, 0, 0};
     SDL_Surface *text = TTF_RenderText_Blended(game->font, timeDisplay, color);
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(game->renderer, text);
@@ -117,6 +115,22 @@ void displayWaveTime(Game *game) {
     pos.y = 10;
     pos.w = text->w;
     pos.h = text->h;
+
+    SDL_RenderCopy(game->renderer, texture, NULL, &pos);
+}
+
+void drawButtonsText(Game *game) {
+
+    SDL_Color color = {255, 255, 255};
+    SDL_Surface *text = TTF_RenderText_Blended(game->font, "Jouer", color);
+
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(game->renderer, text);
+
+    SDL_Rect pos;
+    pos.w = text->w;
+    pos.h = text->h;
+    pos.x = SCREEN_WIDTH / 2 - pos.w / 2;
+    pos.y = SCREEN_HEIGHT / 2 - pos.h / 2;
 
     SDL_RenderCopy(game->renderer, texture, NULL, &pos);
 }

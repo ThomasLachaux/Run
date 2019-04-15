@@ -256,16 +256,6 @@ begin_code.h
 close_code.h
 ../include/SDL2/close_code.h
 
-../include/SDL2/SDL_image.h
-SDL.h
-../include/SDL2/SDL.h
-SDL_version.h
-../include/SDL2/SDL_version.h
-begin_code.h
-../include/SDL2/begin_code.h
-close_code.h
-../include/SDL2/close_code.h
-
 ../include/SDL2/SDL_joystick.h
 SDL_stdinc.h
 ../include/SDL2/SDL_stdinc.h
@@ -640,21 +630,11 @@ game.h
 body.h
 ../include/body.h
 
-C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/main.c
-stdlib.h
+C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/game.c
+math.h
 -
 stdio.h
 -
-SDL2/SDL.h
--
-SDL2/SDL_image.h
--
-time.h
--
 game.h
 C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/game.h
-body.h
-C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/body.h
-world.h
-C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/world.h
 
