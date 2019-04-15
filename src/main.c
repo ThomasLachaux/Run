@@ -25,25 +25,20 @@ int main(int argc, char *argv[]) {
     Game game = initGame();
 
     game.world = createWorld();
-    game.world->player = createBody(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 3 / 4, BIG, BIG, 4, PLAYER_COLOR, Player);
+    game.world->player = createBody(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 3 / 4, BIG, BIG, PLAYER_VELOCITY, PLAYER_COLOR, Player);
 
     addBodyToWorld(game.world, game.world->player);
 
 
     SDL_Surface *background = IMG_Load("background.png");
     SDL_Texture *bg_texture = SDL_CreateTextureFromSurface(game.renderer, background);
+    SDL_Surface *rules = IMG_Load("rules.png");
+    SDL_Texture *bg_rules = SDL_CreateTextureFromSurface(game.renderer, rules);
     SDL_Rect pos;
     pos.x = 0;
     pos.y = 0;
     pos.w = background->w;
     pos.h = background->h;
-
-    /*
-    spawnWave(0, game.world);
-
-    SDL_AddTimer(SPAWN_TIME, createEnemy, game.world);
-    SDL_AddTimer(WAVE_TIME, spawnWave, game.world);
-    SDL_AddTimer(5000, createItem, game.world);*/
 
     createMenu(game.world);
 
@@ -51,8 +46,7 @@ int main(int argc, char *argv[]) {
         handleEvents(&game);
         updateWorldPhysics(game.world);
 
-        //drawBackground(game.renderer);
-        SDL_RenderCopy(game.renderer, bg_texture, NULL, &pos);
+        SDL_RenderCopy(game.renderer, game.world->isPlaying ? bg_texture : bg_rules, NULL, &pos);
 
         drawWorld(game.renderer, game.world);
 

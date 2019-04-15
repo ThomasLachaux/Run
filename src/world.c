@@ -15,9 +15,11 @@ World *createWorld() {
 void createMenu(World *world) {
     world->isPlaying = false;
     world->score = 0;
-    world->startTime = SDL_GetTicks();
-    Body *playButton = createBody(SCREEN_WIDTH / 2 - 300 / 2, SCREEN_HEIGHT / 2 - 50 / 2, 300, 50, 0, 0x222222, Start);
-    addBodyToWorld(world, playButton);
+    Body *easyButton = createBody(SCREEN_WIDTH / 4 - 300 / 2, SCREEN_HEIGHT / 4 * 3 - 50 / 2, 300, 50, 0, 0x222222, Easy);
+    addBodyToWorld(world, easyButton);
+
+    Body *hardButton = createBody(SCREEN_WIDTH / 4 * 3 - 300 / 2, SCREEN_HEIGHT / 4 * 3 - 50 / 2, 300, 50, 0, 0x222222, Hard);
+    addBodyToWorld(world, hardButton);
 
     world->player->transform.x = SCREEN_WIDTH / 2;
     world->player->transform.y = SCREEN_HEIGHT * 3 / 4;
@@ -104,8 +106,21 @@ void onPlayerItemCollision(World *world, Body *player, Body *item) {
     destroyBodyFromWorld(world, item);
 }
 
-void onPlayerStartCollision(World *world, Body *player, Body *start) {
+void onPlayerEasyCollision(World *world, Body *player, Body *button) {
+    world->hardMode = false;
+    startGame(world, player, button);
+}
+
+void onPlayerHardCollision(World *world, Body *player, Body *button) {
+    world->hardMode = true;
+    startGame(world, player, button);
+}
+
+void startGame(World *world, Body *player, Body *button) {
     world->isPlaying = true;
+    world->startTime = SDL_GetTicks();
+    WAVE_TIME = world->hardMode ? WAVE_TIME_HARD : WAVE_TIME_EASY;
+    ENEMY_VELOCITY = world->hardMode ? ENEMY_VELOCITY_HARD : ENEMY_VELOCITY_EASY;
 
     spawnWave(0, world);
 
@@ -113,7 +128,16 @@ void onPlayerStartCollision(World *world, Body *player, Body *start) {
     world->timers[1] = SDL_AddTimer(WAVE_TIME, spawnWave, world);
     world->timers[2] = SDL_AddTimer(5000, createItem, world);
 
-    onPlayerItemCollision(world, player, start);
+    onPlayerItemCollision(world, player, button);
+
+    Element *current = world->first;
+    while (current != NULL) {
+        if(current->body->layer == Easy || current->body->layer == Hard) {
+            Element *toDelete = current;
+            destroyBodyFromWorld(world, toDelete->body);
+        }
+        current = current->next;
+    }
 }
 
 void updateWorldPhysics(World *world) {
@@ -137,7 +161,8 @@ void updateWorldPhysics(World *world) {
     registerCollision(world, Enemy, Ball, onEnemyBallCollision);
     registerCollision(world, Player, Enemy, onPlayerEnemyCollision);
     registerCollision(world, Player, Item, onPlayerItemCollision);
-    registerCollision(world, Player, Start, onPlayerStartCollision);
+    registerCollision(world, Player, Easy, onPlayerEasyCollision);
+    registerCollision(world, Player, Hard, onPlayerHardCollision);
 }
 
 void drawWorld(SDL_Renderer *screen, World *world) {
@@ -215,7 +240,7 @@ Uint32 createEnemy(Uint32 interval, void *world) {
     int x = ranInt(0, 1) ? 0: SCREEN_WIDTH;
     int y = ranInt(0, SCREEN_HEIGHT);
 
-    Body *enemy = createBody(x, y, MEDIUM, MEDIUM, 3, ENEMY_COLOR, Enemy);
+    Body *enemy = createBody(x, y, MEDIUM, MEDIUM, ENEMY_VELOCITY, ENEMY_COLOR, Enemy);
     addBodyToWorld(world, enemy);
 
     return (Uint32) maxInt(SPAWN_MIN, interval - DELTA_TIME);

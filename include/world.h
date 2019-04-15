@@ -15,6 +15,7 @@ struct World {
     Element *first;
     Body *player;
     bool isPlaying;
+    bool hardMode;
     int timers[10];
     int score;
     int startTime;
@@ -33,5 +34,6 @@ Uint32 spawnWave(Uint32 interval, void *world);
 void shoot(World *world, float velocityX, float velocityY);
 void destroyBodyFromWorld(World *world, Body *body);
 void createMenu(World *world);
+void startGame(World *world, Body *player, Body *button);
 
 #endif

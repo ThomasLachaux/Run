@@ -17,7 +17,12 @@
 #define SPAWN_TIME 2000
 #define SPAWN_MIN 500
 #define WAVE_LENGTH 10
-#define WAVE_TIME 30000
+#define WAVE_TIME_EASY 30000
+#define WAVE_TIME_HARD 10000
+
+#define PLAYER_VELOCITY 4
+#define ENEMY_VELOCITY_EASY 3
+#define ENEMY_VELOCITY_HARD 5
 
 // Styles
 #define BIG 20
@@ -26,7 +31,6 @@
 
 //#define GREEN 0x11CE70
 #define BACKGROUND_COLOR 0xFFFFFF
-#define BACKGROUND_SECONDARY_COLOR 0xDDDDDD
 #define PLAYER_COLOR 0x222222
 #define BALL_COLOR 0x222222
 #define ENEMY_COLOR 0xCC0000
@@ -38,6 +42,9 @@
 #define TOP_AZERTY SDLK_z
 #define TOP_QWERTY SDLK_w
 #define BOTTOM SDLK_s
+
+Uint32 WAVE_TIME;
+int ENEMY_VELOCITY;
 
 struct Game {
     SDL_Window *window;

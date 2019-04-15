@@ -120,15 +120,22 @@ void displayWaveTime(Game *game) {
 void drawButtonsText(Game *game) {
 
     SDL_Color color = {255, 255, 255};
-    SDL_Surface *text = TTF_RenderText_Blended(game->font, "Jouer", color);
-
+    SDL_Surface *text = TTF_RenderText_Blended(game->font, "Mode facile", color);
+    
     SDL_Texture *texture = SDL_CreateTextureFromSurface(game->renderer, text);
 
     SDL_Rect pos;
     pos.w = text->w;
     pos.h = text->h;
-    pos.x = SCREEN_WIDTH / 2 - pos.w / 2;
-    pos.y = SCREEN_HEIGHT / 2 - pos.h / 2;
+    pos.x = SCREEN_WIDTH / 4 - pos.w / 2;
+    pos.y = SCREEN_HEIGHT / 4 * 3 - pos.h / 2;
 
+    SDL_RenderCopy(game->renderer, texture, NULL, &pos);
+
+    text = TTF_RenderText_Blended(game->font, "Mode vraiment dur", color);
+    texture = SDL_CreateTextureFromSurface(game->renderer, text);
+    pos.w = text->w;
+    pos.h = text->h;
+    pos.x = SCREEN_WIDTH / 4 * 3 - pos.w / 2;
     SDL_RenderCopy(game->renderer, texture, NULL, &pos);
 }
