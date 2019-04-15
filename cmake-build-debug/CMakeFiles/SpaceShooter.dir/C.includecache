@@ -630,11 +630,15 @@ game.h
 body.h
 ../include/body.h
 
-C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/game.c
-math.h
+C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/world.c
+stdlib.h
 -
 stdio.h
 -
 game.h
-C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/game.h
+-
+math.h
+-
+world.h
+C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/world.h
 

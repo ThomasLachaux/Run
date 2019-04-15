@@ -49,7 +49,6 @@ struct Game {
     TTF_Font *font;
     const Uint8 *keyboardState;
     bool quit;
-    int score;
 };
 typedef struct Game Game;
 

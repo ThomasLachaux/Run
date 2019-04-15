@@ -8,9 +8,19 @@
 World *createWorld() {
     World *world = malloc(sizeof(World));
     world->first = NULL;
-    world->isPlaying = false;
 
     return world;
+}
+
+void createMenu(World *world) {
+    world->isPlaying = false;
+    world->score = 0;
+    world->startTime = SDL_GetTicks();
+    Body *playButton = createBody(SCREEN_WIDTH / 2 - 300 / 2, SCREEN_HEIGHT / 2 - 50 / 2, 300, 50, 0, 0x222222, Start);
+    addBodyToWorld(world, playButton);
+
+    world->player->transform.x = SCREEN_WIDTH / 2;
+    world->player->transform.y = SCREEN_HEIGHT * 3 / 4;
 }
 
 void addBodyToWorld(World *world, Body *body) {
@@ -52,8 +62,31 @@ void onEnemyBallCollision(World *world, Body *enemy, Body *ball) {
     destroyBodyFromWorld(world, ball);
 }
 
+
+
 void onPlayerEnemyCollision(World *world, Body *player, Body *enemy) {
-    destroyBodyFromWorld(world, player);
+    world->isPlaying = false;
+    int i;
+    for(i = 0; i <= 2; i++)
+        SDL_RemoveTimer(world->timers[i]);
+
+
+    // Supprime tous les ennemis et les items
+    Element *current = world->first;
+    while (current != NULL) {
+        if(current->body->layer == Enemy || current->body->layer == Item) {
+            Element *toDelete = current;
+
+            destroyBodyFromWorld(world, toDelete->body);
+
+
+        }
+
+        current = current->next;
+    }
+
+    createMenu(world);
+
 }
 
 void onPlayerItemCollision(World *world, Body *player, Body *item) {
@@ -76,9 +109,9 @@ void onPlayerStartCollision(World *world, Body *player, Body *start) {
 
     spawnWave(0, world);
 
-    SDL_AddTimer(SPAWN_TIME, createEnemy, world);
-    SDL_AddTimer(WAVE_TIME, spawnWave, world);
-    SDL_AddTimer(5000, createItem, world);
+    world->timers[0] = SDL_AddTimer(SPAWN_TIME, createEnemy, world);
+    world->timers[1] = SDL_AddTimer(WAVE_TIME, spawnWave, world);
+    world->timers[2] = SDL_AddTimer(5000, createItem, world);
 
     onPlayerItemCollision(world, player, start);
 }
@@ -102,7 +135,7 @@ void updateWorldPhysics(World *world) {
     }
 
     registerCollision(world, Enemy, Ball, onEnemyBallCollision);
-    //registerCollision(world, Player, Enemy, onPlayerEnemyCollision);
+    registerCollision(world, Player, Enemy, onPlayerEnemyCollision);
     registerCollision(world, Player, Item, onPlayerItemCollision);
     registerCollision(world, Player, Start, onPlayerStartCollision);
 }

@@ -24,8 +24,6 @@ Game initGame() {
 
     game.quit = false;
 
-    game.score = 0;
-
     return game;
 }
 
@@ -79,9 +77,9 @@ int setRenderColor(SDL_Renderer *renderer, Uint32 color) {
 void increaseAndDrawScore(Game *game) {
     char displayScore[6];
 
-    sprintf(displayScore, "%06d", game->score);
+    sprintf(displayScore, "%06d", game->world->score);
 
-    SDL_Color color = {255, 255, 255};
+    SDL_Color color = {0, 0, 0};
     SDL_Surface *text = TTF_RenderText_Blended(game->font, displayScore, color);
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(game->renderer, text);
@@ -94,11 +92,11 @@ void increaseAndDrawScore(Game *game) {
 
     SDL_RenderCopy(game->renderer, texture, NULL, &pos);
 
-    game->score += DELTA_TIME / 10;
+    game->world->score += DELTA_TIME / 10;
 }
 
 void displayWaveTime(Game *game) {
-    int time = WAVE_TIME - SDL_GetTicks() % WAVE_TIME;
+    int time = WAVE_TIME - (SDL_GetTicks() - game->world->startTime) % WAVE_TIME;
     time /= 1000;
     time += 1;
     char timeDisplay[16];

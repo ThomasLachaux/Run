@@ -14,7 +14,10 @@ typedef struct Element Element;
 struct World {
     Element *first;
     Body *player;
-    bool isPlaying
+    bool isPlaying;
+    int timers[10];
+    int score;
+    int startTime;
 };
 typedef struct World World;
 
@@ -29,5 +32,6 @@ Uint32 createItem(Uint32 interval, void *world);
 Uint32 spawnWave(Uint32 interval, void *world);
 void shoot(World *world, float velocityX, float velocityY);
 void destroyBodyFromWorld(World *world, Body *body);
+void createMenu(World *world);
 
 #endif
