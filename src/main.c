@@ -29,8 +29,13 @@ int main(int argc, char *argv[]) {
 
     SDL_Surface *background = IMG_Load("background.png");
     SDL_Texture *bg_texture = SDL_CreateTextureFromSurface(game.renderer, background);
+
     SDL_Surface *rules = IMG_Load("rules.png");
     SDL_Texture *bg_rules = SDL_CreateTextureFromSurface(game.renderer, rules);
+
+    SDL_Surface *gameover = IMG_Load("gameover.png");
+    SDL_Texture *bg_gameover = SDL_CreateTextureFromSurface(game.renderer, gameover);
+
     SDL_Rect pos;
     pos.x = 0;
     pos.y = 0;
@@ -39,21 +44,28 @@ int main(int argc, char *argv[]) {
 
     createMenu(game.world);
 
+
     while(!game.quit) {
         handleEvents(&game);
         updateWorldPhysics(game.world);
 
-        SDL_RenderCopy(game.renderer, game.world->isPlaying ? bg_texture : bg_rules, NULL, &pos);
+        SDL_RenderCopy(game.renderer, game.world->window == MENU ? bg_rules : game.world->window == GAME_OVER ? bg_gameover : bg_texture, NULL, &pos);
 
         drawWorld(game.renderer, game.world);
 
-        if(game.world->isPlaying) {
-            increaseAndDrawScore(&game);
-            displayWaveTime(&game);
-        }
+        switch (game.world->window) {
+            case MENU:
+                drawMenuText(&game);
+                break;
 
-        else {
-            drawButtonsText(&game);
+            case GAME:
+                increaseAndDrawScore(&game);
+                drawWaveTime(&game);
+                break;
+
+            case GAME_OVER:
+                drawGameoverText(&game);
+                break;
         }
 
         SDL_RenderPresent(game.renderer);

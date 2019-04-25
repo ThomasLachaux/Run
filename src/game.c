@@ -1,4 +1,5 @@
 #include <math.h>
+#include <string.h>
 #include <stdio.h>
 
 
@@ -13,6 +14,8 @@ Game initGame() {
     TTF_Init();
 
     game.font = TTF_OpenFont("../src/LemonMilk.ttf", 20);
+    game.bigFont = TTF_OpenFont("../src/LemonMilk.ttf", 50);
+
 
     game.window = SDL_CreateWindow("Space Shooter", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     // todo: à supprimer
@@ -98,7 +101,7 @@ void increaseAndDrawScore(Game *game) {
     SDL_FreeSurface(text);
 }
 
-void displayWaveTime(Game *game) {
+void drawWaveTime(Game *game) {
     int time = WAVE_TIME - (SDL_GetTicks() - game->world->startTime) % WAVE_TIME;
     time /= 1000;
     time += 1;
@@ -123,7 +126,7 @@ void displayWaveTime(Game *game) {
     SDL_FreeSurface(text);
 }
 
-void drawButtonsText(Game *game) {
+void drawMenuText(Game *game) {
 
     SDL_Color color = {255, 255, 255};
     SDL_Surface *text = TTF_RenderText_Blended(game->font, "Mode facile", color);
@@ -149,4 +152,63 @@ void drawButtonsText(Game *game) {
 
     SDL_FreeSurface(text);
     SDL_DestroyTexture(texture);
+}
+
+void drawGameoverText(Game *game) {
+    SDL_Color white = {255, 255, 255};
+    SDL_Color black = {0, 0, 0};
+    SDL_Surface *text = TTF_RenderText_Blended(game->font, "Recommencer", white);
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(game->renderer, text);
+
+    SDL_Rect pos;
+    pos.w = text->w;
+    pos.h = text->h;
+    pos.x = SCREEN_WIDTH / 2 - pos.w / 2;
+    pos.y = SCREEN_HEIGHT / 2 - pos.h / 2 + 100;
+
+    SDL_RenderCopy(game->renderer, texture, NULL, &pos);
+    SDL_FreeSurface(text);
+    SDL_DestroyTexture(texture);
+
+    char displayScore[6];
+
+    sprintf(displayScore, "%06d", game->world->score);
+
+    text = TTF_RenderText_Blended(game->bigFont, displayScore, black);
+
+    texture = SDL_CreateTextureFromSurface(game->renderer, text);
+
+    pos.w = text->w;
+    pos.h = text->h;
+    pos.x = SCREEN_WIDTH / 2 - pos.w / 2;
+    pos.y = 200;
+
+    SDL_RenderCopy(game->renderer, texture, NULL, &pos);
+
+    SDL_DestroyTexture(texture);
+    SDL_FreeSurface(text);
+
+
+    // source: Undertale Game Over
+    char *determination[6];
+    determination[0] = "Tu ne peux pas abandonner comme ça, reste déterminé !";
+    determination[1] = "Ce n'est pas terminé, reste déterminé !";
+    determination[2] = "Ne perds pas espoir, reste déterminé !";
+    determination[3] = "Cela ne peut pas se terminer ainsi, reste déterminé !";
+    determination[4] = "Tu dois continuer, reste déterminé !";
+    determination[5] = "S'il te plaît, n'abandonne pas, reste déterminé !";
+
+    text = TTF_RenderUTF8_Blended(game->font, determination[game->world->determination], black);
+    texture = SDL_CreateTextureFromSurface(game->renderer, text);
+
+    pos.w = text->w;
+    pos.h = text->h;
+    pos.x = SCREEN_WIDTH / 2 - pos.w / 2;
+    pos.y = 300;
+
+    SDL_RenderCopy(game->renderer, texture, NULL, &pos);
+
+    SDL_DestroyTexture(texture);
+    SDL_FreeSurface(text);
+
 }

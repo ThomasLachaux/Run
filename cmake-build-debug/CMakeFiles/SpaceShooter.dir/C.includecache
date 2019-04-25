@@ -633,8 +633,22 @@ body.h
 C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/game.c
 math.h
 -
+string.h
+-
 stdio.h
 -
 game.h
 C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/game.h
+
+C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/world.c
+stdlib.h
+-
+stdio.h
+-
+game.h
+-
+math.h
+-
+world.h
+C:/Users/TGE/Documents/ClionProjects/SpaceShooter/src/world.h
 

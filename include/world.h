@@ -14,11 +14,12 @@ typedef struct Element Element;
 struct World {
     Element *first;
     Body *player;
-    bool isPlaying;
+    int window;
     bool hardMode;
     int timers[10];
     int score;
     int startTime;
+    int determination;
 };
 typedef struct World World;
 

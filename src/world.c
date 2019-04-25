@@ -13,13 +13,21 @@ World *createWorld() {
 }
 
 void createMenu(World *world) {
-    world->isPlaying = false;
+    world->window = MENU;
     world->score = 0;
     Body *easyButton = createBody(SCREEN_WIDTH / 4 - 300 / 2, SCREEN_HEIGHT / 4 * 3 - 50 / 2, 300, 50, 0, 0x222222, Easy);
     addBodyToWorld(world, easyButton);
 
     Body *hardButton = createBody(SCREEN_WIDTH / 4 * 3 - 300 / 2, SCREEN_HEIGHT / 4 * 3 - 50 / 2, 300, 50, 0, 0x222222, Hard);
     addBodyToWorld(world, hardButton);
+}
+
+void createGameOver(World *world) {
+    world->window = GAME_OVER;
+    world->determination = ranInt(0, 5);
+
+    Body *retryButton = createBody(SCREEN_WIDTH / 2 - 300 / 2, SCREEN_HEIGHT / 2 - 50 / 2 + 100, 300, 50, 0, 0x222222, Retry);
+    addBodyToWorld(world, retryButton);
 
     world->player->transform.x = SCREEN_WIDTH / 2;
     world->player->transform.y = SCREEN_HEIGHT * 3 / 4;
@@ -46,19 +54,6 @@ void addBodyToWorld(World *world, Body *body) {
     }
 }
 
-/**
- * Parcours chaque body.
- * Prends en paramètre le world et une fonction ayant pour prototype void callback(Body *body)
- */
-void forEachBody(World *world, void (*callback)(Body *)) {
-    Element *current = world->first;
-
-    while (current != NULL) {
-        (*callback)(current->body);
-        current = current->next;
-    }
-}
-
 void onEnemyBallCollision(World *world, Body *enemy, Body *ball) {
     destroyBodyFromWorld(world, enemy);
     destroyBodyFromWorld(world, ball);
@@ -67,7 +62,7 @@ void onEnemyBallCollision(World *world, Body *enemy, Body *ball) {
 
 
 void onPlayerEnemyCollision(World *world, Body *player, Body *enemy) {
-    world->isPlaying = false;
+    world->window = GAME_OVER;
     int i;
     for(i = 0; i <= 2; i++)
         SDL_RemoveTimer(world->timers[i]);
@@ -87,7 +82,7 @@ void onPlayerEnemyCollision(World *world, Body *player, Body *enemy) {
         current = current->next;
     }
 
-    createMenu(world);
+    createGameOver(world);
 
 }
 
@@ -116,8 +111,13 @@ void onPlayerHardCollision(World *world, Body *player, Body *button) {
     startGame(world, player, button);
 }
 
+void onPlayerRetryCollision(World *world, Body *player, Body *button) {
+    destroyBodyFromWorld(world, button);
+    createMenu(world);
+}
+
 void startGame(World *world, Body *player, Body *button) {
-    world->isPlaying = true;
+    world->window = GAME;
     world->startTime = SDL_GetTicks();
     WAVE_TIME = world->hardMode ? WAVE_TIME_HARD : WAVE_TIME_EASY;
     ENEMY_VELOCITY = world->hardMode ? ENEMY_VELOCITY_HARD : ENEMY_VELOCITY_EASY;
@@ -163,6 +163,7 @@ void updateWorldPhysics(World *world) {
     registerCollision(world, Player, Item, onPlayerItemCollision);
     registerCollision(world, Player, Easy, onPlayerEasyCollision);
     registerCollision(world, Player, Hard, onPlayerHardCollision);
+    registerCollision(world, Player, Retry, onPlayerRetryCollision);
 }
 
 void drawWorld(SDL_Renderer *screen, World *world) {

@@ -43,6 +43,10 @@
 #define TOP_QWERTY SDLK_w
 #define BOTTOM SDLK_s
 
+#define MENU 0
+#define GAME 1
+#define GAME_OVER 2
+
 Uint32 WAVE_TIME;
 int ENEMY_VELOCITY;
 
@@ -54,6 +58,7 @@ struct Game {
     SDL_Event event;
     World *world;
     TTF_Font *font;
+    TTF_Font *bigFont;
     const Uint8 *keyboardState;
     bool quit;
 };
@@ -68,7 +73,8 @@ void normalizeVector(Vector *vector);
 int ranInt(int min, int max);
 int setRenderColor(SDL_Renderer *renderer, Uint32 color);
 void increaseAndDrawScore(Game *game);
-void displayWaveTime(Game *game);
+void drawWaveTime(Game *game);
 void displayRules(Game *game);
-void drawButtonsText(Game *game);
+void drawMenuText(Game *game);
+void drawGameoverText(Game *game);
 #endif
