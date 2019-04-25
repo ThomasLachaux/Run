@@ -9,10 +9,7 @@
 #include "world.h"
 
 
-int i;
-
 void handleEvents(Game *game);
-void drawBackground(SDL_Renderer *renderer);
 
 // todo: reorganiser code
 
@@ -122,9 +119,4 @@ void handleEvents(Game *game) {
 
     else
         game->world->player->direction.x = 0;
-}
-
-void drawBackground(SDL_Renderer *renderer) {
-    setRenderColor(renderer, BACKGROUND_COLOR);
-    SDL_RenderClear(renderer);
 }

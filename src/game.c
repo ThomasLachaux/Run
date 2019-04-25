@@ -93,6 +93,9 @@ void increaseAndDrawScore(Game *game) {
     SDL_RenderCopy(game->renderer, texture, NULL, &pos);
 
     game->world->score += DELTA_TIME / 10;
+
+    SDL_DestroyTexture(texture);
+    SDL_FreeSurface(text);
 }
 
 void displayWaveTime(Game *game) {
@@ -115,14 +118,17 @@ void displayWaveTime(Game *game) {
     pos.h = text->h;
 
     SDL_RenderCopy(game->renderer, texture, NULL, &pos);
+
+    SDL_DestroyTexture(texture);
+    SDL_FreeSurface(text);
 }
 
 void drawButtonsText(Game *game) {
 
     SDL_Color color = {255, 255, 255};
     SDL_Surface *text = TTF_RenderText_Blended(game->font, "Mode facile", color);
-    
     SDL_Texture *texture = SDL_CreateTextureFromSurface(game->renderer, text);
+
 
     SDL_Rect pos;
     pos.w = text->w;
@@ -131,6 +137,8 @@ void drawButtonsText(Game *game) {
     pos.y = SCREEN_HEIGHT / 4 * 3 - pos.h / 2;
 
     SDL_RenderCopy(game->renderer, texture, NULL, &pos);
+    SDL_FreeSurface(text);
+    SDL_DestroyTexture(texture);
 
     text = TTF_RenderText_Blended(game->font, "Mode vraiment dur", color);
     texture = SDL_CreateTextureFromSurface(game->renderer, text);
@@ -138,4 +146,7 @@ void drawButtonsText(Game *game) {
     pos.h = text->h;
     pos.x = SCREEN_WIDTH / 4 * 3 - pos.w / 2;
     SDL_RenderCopy(game->renderer, texture, NULL, &pos);
+
+    SDL_FreeSurface(text);
+    SDL_DestroyTexture(texture);
 }
