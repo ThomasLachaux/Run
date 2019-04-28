@@ -1,1 +1,7 @@
 .idea/
+cmake-build-debug/CMakeFiles/
+cmake-build-debug/CMakeCache.txt
+cmake-build-debug/Makefile
+cmake-build-debug/SpaceShooter.cbp
+cmake-build-debug/SpaceShooter.exe
+cmake-build-debug/cmake_install.cmake

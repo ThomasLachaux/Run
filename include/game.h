@@ -29,8 +29,6 @@
 #define MEDIUM 13
 #define SMALL 8
 
-//#define GREEN 0x11CE70
-#define BACKGROUND_COLOR 0xFFFFFF
 #define PLAYER_COLOR 0x222222
 #define BALL_COLOR 0x222222
 #define ENEMY_COLOR 0xCC0000
@@ -53,8 +51,6 @@ int ENEMY_VELOCITY;
 struct Game {
     SDL_Window *window;
     SDL_Renderer *renderer;
-    // todo: à supprimer
-    SDL_Surface *screen;
     SDL_Event event;
     World *world;
     TTF_Font *font;

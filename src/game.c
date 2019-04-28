@@ -2,9 +2,11 @@
 #include <string.h>
 #include <stdio.h>
 
-
 #include "game.h"
 
+/**
+ * Initialise la SDL et la fenetre
+ */
 Game initGame() {
 
     Game game;
@@ -18,8 +20,6 @@ Game initGame() {
 
 
     game.window = SDL_CreateWindow("Space Shooter", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-    // todo: à supprimer
-    game.screen = SDL_GetWindowSurface(game.window);
 
     game.renderer = SDL_CreateRenderer(game.window, -1, SDL_RENDERER_ACCELERATED);
 
@@ -30,6 +30,9 @@ Game initGame() {
     return game;
 }
 
+/**
+ * Détruie proprement la SDL
+ */
 void destroyGame(Game *game) {
     destroyWorld(game->world);
     SDL_DestroyWindow(game->window);
@@ -40,18 +43,30 @@ void destroyGame(Game *game) {
     SDL_Quit();
 }
 
+/**
+ * Retourne le minimum des 2 entiers en argument
+ */
 int minInt(int x, int y) {
     return x < y ? x : y;
 }
 
+/**
+ * Retourne le maximum des 2 entiers en argument
+ */
 int maxInt(int x, int y) {
     return x > y ? x : y;
 }
 
+/**
+ * Retourne la valeur si elle est comprise entre le min et le max, sinon l'une des 2 bornes
+ */
 int clamp(int lower, int x, int upper) {
     return minInt(upper, maxInt(x, lower));
 }
 
+/**
+ * Retourne un vecteur normal
+ */
 void normalizeVector(Vector *vector) {
     double magnitude = sqrt(pow(vector->x, 2) + pow(vector->y, 2));
 
@@ -61,10 +76,16 @@ void normalizeVector(Vector *vector) {
     }
 }
 
+/**
+ * Retourne un entier aléatoire entre les 2 bornes
+ */
 int ranInt(int min, int max) {
     return rand() % (max + 1 - min) + min;
 }
 
+/** Override la fonction SDL_SetRenderDrawColor pour pouvoir utiliser les couleurs en hexadécimal
+ *
+ */
 int setRenderColor(SDL_Renderer *renderer, Uint32 color) {
 
     Uint8 r, g, b, a;
@@ -77,6 +98,9 @@ int setRenderColor(SDL_Renderer *renderer, Uint32 color) {
     return SDL_SetRenderDrawColor(renderer, r, g, b, a);
 }
 
+/**
+ * Augmente le score au fur et à mesure du temps et le dessine
+ */
 void increaseAndDrawScore(Game *game) {
     char displayScore[6];
 
