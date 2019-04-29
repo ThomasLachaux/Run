@@ -99,6 +99,21 @@ int setRenderColor(SDL_Renderer *renderer, Uint32 color) {
 }
 
 /**
+ * Transform une couleur hexadécimale en SDL_Color
+ */
+SDL_Color hexToSDLColor(Uint32 hex) {
+    Uint8 r, g, b;
+
+    r = hex / (256 * 256);
+    g = hex / 256 % 256;
+    b = hex % 256;
+
+    SDL_Color color = {r, g, b};
+
+    return color;
+}
+
+/**
  * Augmente le score au fur et à mesure du temps et le dessine
  */
 void increaseAndDrawScore(Game *game) {
@@ -106,8 +121,7 @@ void increaseAndDrawScore(Game *game) {
 
     sprintf(displayScore, "%06d", game->world->score);
 
-    SDL_Color color = {0, 0, 0};
-    SDL_Surface *text = TTF_RenderText_Blended(game->font, displayScore, color);
+    SDL_Surface *text = TTF_RenderText_Blended(game->font, displayScore, hexToSDLColor(0x000000));
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(game->renderer, text);
 
@@ -132,9 +146,10 @@ void drawWaveTime(Game *game) {
     char timeDisplay[16];
     sprintf(timeDisplay, "Vague: %02d s", time);
 
-    Uint8 displayRed = (Uint8) (time <= 10 && time % 2 == 0 ? 255 : 0);
-    SDL_Color color = {displayRed, 0, 0};
-    SDL_Surface *text = TTF_RenderText_Blended(game->font, timeDisplay, color);
+    // Affiche rouge si le temps est inférieur à 10 et qu'il est pair
+    Uint32 color = time <= 10 && time % 2 == 0 ? 0xCC0000 : 0x000000;
+
+    SDL_Surface *text = TTF_RenderText_Blended(game->font, timeDisplay, hexToSDLColor(color));
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(game->renderer, text);
 
@@ -150,9 +165,12 @@ void drawWaveTime(Game *game) {
     SDL_FreeSurface(text);
 }
 
+/**
+ * Dessine les textes des boutons du menu
+ */
 void drawMenuText(Game *game) {
 
-    SDL_Color color = {255, 255, 255};
+    SDL_Color color = hexToSDLColor(0xFFFFFF);
     SDL_Surface *text = TTF_RenderText_Blended(game->font, "Mode facile", color);
     SDL_Texture *texture = SDL_CreateTextureFromSurface(game->renderer, text);
 
@@ -178,9 +196,12 @@ void drawMenuText(Game *game) {
     SDL_DestroyTexture(texture);
 }
 
+/**
+ * Dessine les textes du menu du gameOver
+ */
 void drawGameoverText(Game *game) {
-    SDL_Color white = {255, 255, 255};
-    SDL_Color black = {0, 0, 0};
+    SDL_Color white = hexToSDLColor(0xFFFFFF);
+    SDL_Color black = hexToSDLColor(0x000000);
     SDL_Surface *text = TTF_RenderText_Blended(game->font, "Recommencer", white);
     SDL_Texture *texture = SDL_CreateTextureFromSurface(game->renderer, text);
 
@@ -213,7 +234,7 @@ void drawGameoverText(Game *game) {
     SDL_FreeSurface(text);
 
 
-    // source: Undertale Game Over
+    // source: Undertale
     char *determination[6];
     determination[0] = "Tu ne peux pas abandonner comme ça, reste déterminé !";
     determination[1] = "Ce n'est pas terminé, reste déterminé !";

@@ -21,8 +21,12 @@
 #define WAVE_TIME_HARD 10000
 
 #define PLAYER_VELOCITY 4
+
 #define ENEMY_VELOCITY_EASY 3
 #define ENEMY_VELOCITY_HARD 5
+
+#define BALL_VELOCITY_EASY 5
+#define BALL_VELOCITY_HARD 8
 
 // Styles
 #define BIG 20
@@ -46,7 +50,6 @@
 #define GAME_OVER 2
 
 Uint32 WAVE_TIME;
-int ENEMY_VELOCITY;
 
 struct Game {
     SDL_Window *window;
@@ -70,7 +73,7 @@ int ranInt(int min, int max);
 int setRenderColor(SDL_Renderer *renderer, Uint32 color);
 void increaseAndDrawScore(Game *game);
 void drawWaveTime(Game *game);
-void displayRules(Game *game);
 void drawMenuText(Game *game);
 void drawGameoverText(Game *game);
+SDL_Color hexToSDLColor(Uint32 hex);
 #endif

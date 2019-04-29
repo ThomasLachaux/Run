@@ -11,6 +11,7 @@
 
 void handleEvents(Game *game);
 
+
 int main(int argc, char *argv[]) {
 
     // Seed modifiée

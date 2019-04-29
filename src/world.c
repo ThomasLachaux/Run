@@ -5,6 +5,9 @@
 
 #include "world.h"
 
+/**
+ * Crée un monde. Un monde contient entre autre une liste chainées de corps. (On utilise la structure Element pour gérer cette liste chainée)
+ */
 World *createWorld() {
     World *world = malloc(sizeof(World));
     world->first = NULL;
@@ -12,6 +15,9 @@ World *createWorld() {
     return world;
 }
 
+/**
+ * Crée le menu: le fond des 2 boutons du menu
+ */
 void createMenu(World *world) {
     world->window = MENU;
     world->score = 0;
@@ -22,6 +28,9 @@ void createMenu(World *world) {
     addBodyToWorld(world, hardButton);
 }
 
+/**
+ * Crée le fond du bouton retry, et change la phrase de détermination
+ */
 void createGameOver(World *world) {
     world->window = GAME_OVER;
     world->determination = ranInt(0, 5);
@@ -33,6 +42,9 @@ void createGameOver(World *world) {
     world->player->transform.y = SCREEN_HEIGHT * 3 / 4;
 }
 
+/**
+ * Ajoute un corps au monde.
+ */
 void addBodyToWorld(World *world, Body *body) {
 
     Element *element = malloc(sizeof(Element));
@@ -54,13 +66,20 @@ void addBodyToWorld(World *world, Body *body) {
     }
 }
 
+/**
+ * Fonction appelée lors d'une collision entre un ennemi et une balle.
+ * Détruit l'ennemi et la balle et augment le score
+ */
 void onEnemyBallCollision(World *world, Body *enemy, Body *ball) {
     destroyBodyFromWorld(world, enemy);
     destroyBodyFromWorld(world, ball);
+    world->score += 100;
 }
 
-
-
+/**
+ * Fonction appelée lors d'une collsion entre un joueur et un ennemi.
+ * Lance le game over
+ */
 void onPlayerEnemyCollision(World *world, Body *player, Body *enemy) {
     world->window = GAME_OVER;
     int i;
@@ -86,6 +105,10 @@ void onPlayerEnemyCollision(World *world, Body *player, Body *enemy) {
 
 }
 
+/**
+ * Fonction appelée lors d'une collision entre un joueur et un item.
+ * Fait exploser l'item
+ */
 void onPlayerItemCollision(World *world, Body *player, Body *item) {
     int x,y;
 
@@ -101,26 +124,37 @@ void onPlayerItemCollision(World *world, Body *player, Body *item) {
     destroyBodyFromWorld(world, item);
 }
 
+/**
+ * Fonction appelée lors d'une collsion entre le joueur et le bouton facile
+ */
 void onPlayerEasyCollision(World *world, Body *player, Body *button) {
     world->hardMode = false;
     startGame(world, player, button);
 }
 
+/**
+ * Fonction appelée lors d'une collsion entre le joueur et le bouton difficile
+ */
 void onPlayerHardCollision(World *world, Body *player, Body *button) {
     world->hardMode = true;
     startGame(world, player, button);
 }
 
+/**
+ * Fonction appelée lors d'une collsion entre le joueur et le bouton recommencer
+ */
 void onPlayerRetryCollision(World *world, Body *player, Body *button) {
     destroyBodyFromWorld(world, button);
     createMenu(world);
 }
 
+/**
+ * Démarre le jeu, supprime le bouton easy et hard
+ */
 void startGame(World *world, Body *player, Body *button) {
     world->window = GAME;
     world->startTime = SDL_GetTicks();
     WAVE_TIME = world->hardMode ? WAVE_TIME_HARD : WAVE_TIME_EASY;
-    ENEMY_VELOCITY = world->hardMode ? ENEMY_VELOCITY_HARD : ENEMY_VELOCITY_EASY;
 
     spawnWave(0, world);
 
@@ -140,6 +174,9 @@ void startGame(World *world, Body *player, Body *button) {
     }
 }
 
+/**
+ * Met à jour la position de tous les corps du monde
+ */
 void updateWorldPhysics(World *world) {
     Element *current = world->first;
 
@@ -166,6 +203,9 @@ void updateWorldPhysics(World *world) {
     registerCollision(world, Player, Retry, onPlayerRetryCollision);
 }
 
+/**
+ * Dessine tous les corps du monde
+ */
 void drawWorld(SDL_Renderer *screen, World *world) {
     Element *current = world->first;
 
@@ -175,6 +215,9 @@ void drawWorld(SDL_Renderer *screen, World *world) {
     }
 }
 
+/**
+ * Détruit tous les corps du monde
+ */
 void destroyWorld(World *world) {
     Element *current = world->first;
     Element *toDestroy;
@@ -190,6 +233,9 @@ void destroyWorld(World *world) {
     free(world);
 }
 
+/**
+ * Détruit un coprs et le supprime du monde
+ */
 void destroyBodyFromWorld(World *world, Body *body) {
     Element *to_delete = world->first;
     Element *previous, *next;
@@ -221,11 +267,20 @@ void destroyBodyFromWorld(World *world, Body *body) {
         }
 
         destroyBody(to_delete->body);
-        // todo: trouver une solution à ça
+
+        /*
+         * Il faudrait décommenter la ligne si dessous pour que la mémoire soit libérée.
+         * Cependant, cela provoque des erreurs alétoire dans l'application qui entrainent un crash.
+         * Je n'ai pas trouvé la vrai source du problème, et comme la fuite de mémoire est extrement faible;
+         * J'ai préféré commenter cette ligne
+         */
         //free(to_delete);
     }
 }
 
+/**
+ * Ajoute un item au monde
+ */
 Uint32 createItem(Uint32 interval, void *world) {
     int x = ranInt(MEDIUM, SCREEN_WIDTH - MEDIUM);
     int y = ranInt(MEDIUM, SCREEN_HEIGHT - MEDIUM);
@@ -236,17 +291,26 @@ Uint32 createItem(Uint32 interval, void *world) {
     return interval;
 }
 
+/**
+ * Ajoute un ennemi au monde qui suit le joueur
+ * Retourne un interval plus petit jusq'a une limite pour faire une acceleration
+ */
 Uint32 createEnemy(Uint32 interval, void *world) {
 
     int x = ranInt(0, 1) ? 0: SCREEN_WIDTH;
     int y = ranInt(0, SCREEN_HEIGHT);
 
-    Body *enemy = createBody(x, y, MEDIUM, MEDIUM, ENEMY_VELOCITY, ENEMY_COLOR, Enemy);
+    int velocity = !((World*) world)->hardMode ? ENEMY_VELOCITY_EASY : ENEMY_VELOCITY_HARD;
+
+    Body *enemy = createBody(x, y, MEDIUM, MEDIUM, velocity, ENEMY_COLOR, Enemy);
     addBodyToWorld(world, enemy);
 
     return (Uint32) maxInt(SPAWN_MIN, interval - DELTA_TIME);
 }
 
+/**
+ * Crée une vague d'ennemis
+ */
 Uint32 spawnWave(Uint32 interval, void *world) {
     int i;
 
@@ -256,12 +320,17 @@ Uint32 spawnWave(Uint32 interval, void *world) {
     return interval;
 }
 
+/**
+ * Permet au joueur de tirer
+ */
 void shoot(World *world, float velocityX, float velocityY) {
 
     int x = world->player->transform.x + BIG / 2 - SMALL / 2;
     int y = world->player->transform.y + BIG / 2 - SMALL / 2;
 
-    Body *ball = createBody(x, y, SMALL, SMALL, 5, BALL_COLOR, Ball);
+    int velocity = !world->hardMode ? BALL_VELOCITY_EASY : BALL_VELOCITY_HARD;
+
+    Body *ball = createBody(x, y, SMALL, SMALL, velocity, BALL_COLOR, Ball);
 
     ball->direction.x = velocityX;
     ball->direction.y = velocityY;
@@ -269,6 +338,10 @@ void shoot(World *world, float velocityX, float velocityY) {
     addBodyToWorld(world, ball);
 }
 
+/**
+ * Enregistre la collision entre 2 couches. Si il y a collision, appelle la fonction passée en paramètre.
+ * Par convention, le nom du callback s'appelle on[LayerA][LayerB]Collision
+ */
 void registerCollision(World *world, Layer layerA, Layer layerB, void (*callback)(World *, Body *, Body *)) {
 
     Element *elementA, *elementB, *nextElementA, *nextElementB;
@@ -276,8 +349,6 @@ void registerCollision(World *world, Layer layerA, Layer layerB, void (*callback
 
     elementA = world->first;
 
-    
-    
     // Premier parcours
     while (elementA != NULL) {
         

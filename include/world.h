@@ -4,6 +4,9 @@
 #include "game.h"
 #include "body.h"
 
+/**
+ * Structure de liste chainée contenant des coprs
+ */
 struct Element {
     Body *body;
     struct Element *previous;
@@ -11,6 +14,9 @@ struct Element {
 };
 typedef struct Element Element;
 
+/**
+ * Structure du monde
+ */
 struct World {
     Element *first;
     Body *player;

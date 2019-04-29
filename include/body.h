@@ -5,6 +5,9 @@
 #include <stdbool.h>
 #include "world.h"
 
+/**
+ * Enumération pour attribuer un type à un corps
+ */
 enum Layer {
     Player, Enemy, Ball, Item, Easy, Hard, Retry
 };
@@ -30,7 +33,7 @@ typedef struct Body Body;
 Body *createBody(int x, int y, int w, int h, float velocity, Uint32 color, Layer layer);
 void updateBodyPhysics(Body *body);
 void drawBody(SDL_Renderer *screen, Body *body);
-void calculatePosition(Body *body);
+
 void limitPosition(Body *body);
 
 void moveUp(Body *body);
