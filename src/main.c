@@ -1,3 +1,10 @@
+/**
+ * @brief Projet effectué dans le cadre de l'UE Microprocesseur en P19
+ * @author Thomas de Lachaux
+ * @ref https://github.com/ThomasLachaux/SpaceShooter
+ * @copyright This project is released under the GNU Public License.
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <SDL2/SDL.h>
@@ -27,17 +34,17 @@ int main(int argc, char *argv[]) {
     addBodyToWorld(game.world, game.world->player);
 
     // Initialisation du logo
-    SDL_Surface *logo = IMG_Load("logo.png");
+    SDL_Surface *logo = IMG_Load(ASSETS("logo.png"));
     SDL_SetWindowIcon(game.window, logo);
 
     // Initialisation des images de fond ainsi que les textures
-    SDL_Surface *background = IMG_Load("background.png");
+    SDL_Surface *background = IMG_Load(ASSETS("background.png"));
     SDL_Texture *bg_texture = SDL_CreateTextureFromSurface(game.renderer, background);
 
-    SDL_Surface *rules = IMG_Load("rules.png");
+    SDL_Surface *rules = IMG_Load(ASSETS("rules.png"));
     SDL_Texture *bg_rules = SDL_CreateTextureFromSurface(game.renderer, rules);
 
-    SDL_Surface *gameover = IMG_Load("gameover.png");
+    SDL_Surface *gameover = IMG_Load(ASSETS("gameover.png"));
     SDL_Texture *bg_gameover = SDL_CreateTextureFromSurface(game.renderer, gameover);
 
     // Initialisation des coordonées du fond. Comme la taille des images est la même, on se base sur la première

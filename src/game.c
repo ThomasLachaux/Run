@@ -15,8 +15,8 @@ Game initGame() {
 
     TTF_Init();
 
-    game.font = TTF_OpenFont("../src/LemonMilk.ttf", 20);
-    game.bigFont = TTF_OpenFont("../src/LemonMilk.ttf", 50);
+    game.font = TTF_OpenFont(ASSETS("LemonMilk.ttf"), 20);
+    game.bigFont = TTF_OpenFont(ASSETS("LemonMilk.ttf"), 50);
 
 
     game.window = SDL_CreateWindow("Space Shooter", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);

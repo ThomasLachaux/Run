@@ -12,6 +12,9 @@
 #define SCREEN_WIDTH 1080
 #define SCREEN_HEIGHT 720
 
+#define ASSETS_DIRECTORY "../assets/"
+#define ASSETS(a) ASSETS_DIRECTORY a
+
 // Game design
 #define VELOCITY_COEFF 12
 #define SPAWN_TIME 2000
