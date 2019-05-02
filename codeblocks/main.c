@@ -51,9 +51,7 @@ int main(int argc, char *argv[]) {
     SDL_Rect bg_pos;
     bg_pos.x = 0;
     bg_pos.y = 0;
-
     bg_pos.w = background->w;
-
     bg_pos.h = background->h;
 
 
