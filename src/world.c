@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <game.h>
 #include <math.h>
 
+#include "game.h"
 #include "world.h"
 
 /**

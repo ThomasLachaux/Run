@@ -1,3 +1,0 @@
-C:/Users/TGE/Documents/ClionProjects/SpaceShooter/build/CMakeFiles/SpaceShooter.dir
-C:/Users/TGE/Documents/ClionProjects/SpaceShooter/build/CMakeFiles/edit_cache.dir
-C:/Users/TGE/Documents/ClionProjects/SpaceShooter/build/CMakeFiles/rebuild_cache.dir
