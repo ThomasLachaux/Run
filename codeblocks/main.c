@@ -1,7 +1,7 @@
 /**
  * @brief Projet effectué dans le cadre de l'UE Microprocesseur en P19
  * @author Thomas de Lachaux
- * @ref https://github.com/ThomasLachaux/SpaceShooter
+ * @ref https://github.com/ThomasLachaux/Run
  * @copyright This project is released under the GNU Public License.
  */
 

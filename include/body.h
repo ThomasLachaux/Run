@@ -1,5 +1,5 @@
-#ifndef SPACESHOOTER_PLAYER_H
-#define SPACESHOOTER_PLAYER_H
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include <SDL2/SDL.h>
 #include <stdbool.h>

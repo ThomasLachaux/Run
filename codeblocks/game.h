@@ -1,5 +1,5 @@
-#ifndef SPACESHOOTER_GAME_H
-#define SPACESHOOTER_GAME_H
+#ifndef GAME_H
+#define GAME_H
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>

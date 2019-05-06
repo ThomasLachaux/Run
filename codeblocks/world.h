@@ -1,5 +1,5 @@
-#ifndef SPACESHOOTER_WORLD_H
-#define SPACESHOOTER_WORLD_H
+#ifndef WORLD_H
+#define WORLD_H
 
 #include "game.h"
 #include "body.h"
