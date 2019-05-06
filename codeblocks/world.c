@@ -21,10 +21,10 @@ World *createWorld() {
 void createMenu(World *world) {
     world->window = MENU;
     world->score = 0;
-    Body *easyButton = createBody(SCREEN_WIDTH / 4 - 300 / 2, SCREEN_HEIGHT / 4 * 3 - 50 / 2, 300, 50, 0, 0x222222, Easy);
+    Body *easyButton = createBody(SCREEN_WIDTH / 4 - 300 / 2, SCREEN_HEIGHT / 6 * 5 - 50 / 2, 300, 50, 0, 0x222222, Easy);
     addBodyToWorld(world, easyButton);
 
-    Body *hardButton = createBody(SCREEN_WIDTH / 4 * 3 - 300 / 2, SCREEN_HEIGHT / 4 * 3 - 50 / 2, 300, 50, 0, 0x222222, Hard);
+    Body *hardButton = createBody(SCREEN_WIDTH / 4 * 3 - 300 / 2, SCREEN_HEIGHT / 6 * 5 - 50 / 2, 300, 50, 0, 0x222222, Hard);
     addBodyToWorld(world, hardButton);
 }
 
@@ -285,7 +285,7 @@ Uint32 createItem(Uint32 interval, void *world) {
     int x = ranInt(MEDIUM, SCREEN_WIDTH - MEDIUM);
     int y = ranInt(MEDIUM, SCREEN_HEIGHT - MEDIUM);
 
-    Body *item = createBody(x, y, MEDIUM, MEDIUM, 0, 0x0000CC, Item);
+    Body *item = createBody(x, y, MEDIUM, MEDIUM, 0, ITEM_COLOR, Item);
     addBodyToWorld(world, item);
 
     return interval;

@@ -1,7 +1,7 @@
 #include <math.h>
 #include <string.h>
 #include <stdio.h>
-
+#include <stdlib.h>
 #include "game.h"
 
 /**
@@ -179,7 +179,7 @@ void drawMenuText(Game *game) {
     pos.w = text->w;
     pos.h = text->h;
     pos.x = SCREEN_WIDTH / 4 - pos.w / 2;
-    pos.y = SCREEN_HEIGHT / 4 * 3 - pos.h / 2;
+    pos.y = SCREEN_HEIGHT / 6 * 5 - pos.h / 2;
 
     SDL_RenderCopy(game->renderer, texture, NULL, &pos);
     SDL_FreeSurface(text);

@@ -39,6 +39,8 @@
 #define PLAYER_COLOR 0x222222
 #define BALL_COLOR 0x222222
 #define ENEMY_COLOR 0xCC0000
+#define ITEM_COLOR 0x0000CC
+
 
 // Contrôles
 #define LEFT_AZERTY SDLK_q
