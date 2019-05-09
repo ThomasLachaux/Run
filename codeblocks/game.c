@@ -217,7 +217,7 @@ void drawGameoverText(Game *game) {
 
     char displayScore[6];
 
-    sprintf(displayScore, "%06d", game->world->score);
+    sprintf(displayScore, "%06d - %06d", game->world->score, game->world->highScores[game->world->hardMode]);
 
     text = TTF_RenderText_Blended(game->bigFont, displayScore, black);
 

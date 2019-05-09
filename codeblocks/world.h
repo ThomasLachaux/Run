@@ -26,6 +26,7 @@ struct World {
     int score;
     int startTime;
     int determination;
+    int highScores[2];
 };
 typedef struct World World;
 

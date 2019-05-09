@@ -12,6 +12,17 @@ World *createWorld() {
     World *world = malloc(sizeof(World));
     world->first = NULL;
 
+    // Si les scores existent, les reprend, sinon il les met à 0
+    FILE *file = fopen(SAVEFILE, "rb");
+
+    if(file != NULL)
+        fread(world->highScores, sizeof(int), 2, file);
+
+    else {
+        world->highScores[EASY] = 0;
+        world->highScores[HARD] = 0;
+    }
+
     return world;
 }
 
@@ -40,6 +51,11 @@ void createGameOver(World *world) {
 
     world->player->transform.x = SCREEN_WIDTH / 2;
     world->player->transform.y = SCREEN_HEIGHT * 3 / 4;
+
+    // Remplace le highscore par le score actuel si le score actuel est plus elevé que le highscore
+    // world->highScores[world->hardMode] permet d'acceder au highscore approprié. (Mode facile ou hard)
+    world->highScores[world->hardMode] = world->score > world->highScores[world->hardMode] ? world->score : world->highScores[world->hardMode];
+
 }
 
 /**
@@ -216,9 +232,10 @@ void drawWorld(SDL_Renderer *screen, World *world) {
 }
 
 /**
- * Détruit tous les corps du monde
+ * Détruit tous les corps du monde et enregistre les score
  */
 void destroyWorld(World *world) {
+    // Destruction des elements
     Element *current = world->first;
     Element *toDestroy;
 
@@ -229,6 +246,10 @@ void destroyWorld(World *world) {
         destroyBody(toDestroy->body);
         free(toDestroy);
     }
+
+    // Ecriture des scores
+    FILE *file = fopen(SAVEFILE, "wb");
+    fwrite(world->highScores, sizeof(int), 2, file);
 
     free(world);
 }

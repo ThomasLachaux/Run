@@ -15,7 +15,7 @@ Le projet à été codé à sur l'IDE JetBrains CLion avec MinGw et CMake. **Une
 ├───lib/ : Tous les fichiers .lib
 ├───output/ : Tous les fichiers .dll plus l'executable
 ├───src/ : Tous les fichiers sources en .c
-├───CMakeLists.txt: Fichier de configuration de CMake  
+├───CMakeLists.txt: Fichier de configuration de CMake, précise à CMake où trouver les .dll, .h, .lib, .c...
 ├───synchro-codeblocks.bat : Executer ce fichier replique les fichiers sources du projet CLion vers Codeblocks 
 ```
   
@@ -24,10 +24,12 @@ Le projet à été codé à sur l'IDE JetBrains CLion avec MinGw et CMake. **Une
 - [CMake](https://cmake.org)  
 - [MinGW](http://www.mingw.org/)  
   
-## Installation  
+## Compilation
 
 ### Avec CLion
-Ajouter MinGW en Toolchains. Attention, si Git est présent dans la variable PATH de l'ordinateur, ajouter en argument de CMake (Settings > Build > CMake) l'argument `-DCMAKE_SH=CMAKE_SH-NOTFOUND`
+Ouvrir le projet avec CLion, tout se fait automatiquement, la configuration du build étant dans le dossier .idea/
+Il faut cependant
+Ajouter MinGW en Toolchains.
 ```  
 set "PATH=%PATH%;[CheminVersMinGW]\MinGW\bin;"  
 mkdir build  

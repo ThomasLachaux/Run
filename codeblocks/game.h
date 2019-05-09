@@ -54,6 +54,11 @@
 #define GAME 1
 #define GAME_OVER 2
 
+#define EASY 0
+#define HARD 1
+
+#define SAVEFILE "save.bin"
+
 Uint32 WAVE_TIME;
 
 struct Game {
