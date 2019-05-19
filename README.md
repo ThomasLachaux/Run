@@ -1,6 +1,11 @@
 ﻿
 
+
 # Run !
+
+## Pour jouer
+Télécharger le projet en cliquant sur *Clone or Download > Dowload ZIP*.
+L’exécutable se trouve dans le dossier *output/Run.exe*
 
 ## Introduction
 
